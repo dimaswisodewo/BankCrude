@@ -59,6 +59,7 @@ public struct PrimaryButton: View {
         self.height = height
         self.action = action
     }
+    @Environment(\.isEnabled) private var isEnabled
     
     public var body: some View {
         Button(action: action) {
@@ -66,18 +67,18 @@ public struct PrimaryButton: View {
                 if let icon = icon {
                     icon
                         .font(.system(size: 18, weight: .bold))
-                        .foregroundColor(iconColor)
+                        .foregroundColor(isEnabled ? iconColor : Color.textSecondary.opacity(0.6))
                 }
                 
                 Text(title)
                     .typography(.body, weight: .semibold)
-                    .foregroundColor(foregroundColor)
+                    .foregroundColor(isEnabled ? foregroundColor : Color.textSecondary.opacity(0.8))
             }
             .frame(maxWidth: .infinity)
             .frame(height: height)
-            .background(backgroundColor)
+            .background(isEnabled ? backgroundColor : Color.textSecondary.opacity(0.15))
             .clipShape(Capsule())
-            .shadow(color: Color.black.opacity(0.12), radius: 8, x: 0, y: 4)
+            .shadow(color: Color.black.opacity(isEnabled ? 0.12 : 0.0), radius: 8, x: 0, y: 4)
         }
         .buttonStyle(PrimaryButtonStyle())
     }
@@ -98,18 +99,19 @@ public struct PrimaryButtonStyle: ButtonStyle {
 #Preview {
     VStack(spacing: 16) {
         PrimaryButton(
-            title: "Transfer",
+            title: "Transfer (Enabled)",
             systemImageName: "arrowshape.turn.up.left.fill"
         ) {
             print("Transfer tapped")
         }
         
         PrimaryButton(
-            title: "QRIS",
+            title: "QRIS (Disabled)",
             systemImageName: "qrcode"
         ) {
             print("QRIS tapped")
         }
+        .disabled(true)
     }
     .padding(24)
     .background(Color.backgroundWhite)

@@ -186,16 +186,8 @@ struct TransactionReceiptView: View {
             
             // Bottom Action Area
             VStack {
-                Button(action: {
+                PrimaryButton(title: "Back to Home") {
                     router.popToRoot()
-                }) {
-                    Text("Back to Home")
-                        .typography(.body, weight: .bold)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 54)
-                        .background(Color.primaryBlack)
-                        .cornerRadius(12)
                 }
                 .padding(.horizontal, 24)
                 .padding(.bottom, 16)

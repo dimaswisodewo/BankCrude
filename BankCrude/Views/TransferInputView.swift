@@ -234,21 +234,12 @@ struct TransferInputView: View {
             
             // Bottom Continue Area
             VStack {
-                Button(action: {
+                PrimaryButton(title: "Continue") {
                     isShowingConfirmationSheet = true
-                }) {
-                    Text("Continue")
-                        .typography(.body, weight: .bold)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 54)
-                        .background(isFormValid ? Color.primaryBlack : Color.textSecondary.opacity(0.4))
-                        .cornerRadius(12)
                 }
                 .disabled(!isFormValid)
                 .padding(.horizontal, 24)
                 .padding(.bottom, 16)
-                .buttonStyle(ScaleButtonStyle())
             }
             .background(Color.backgroundWhite)
         }

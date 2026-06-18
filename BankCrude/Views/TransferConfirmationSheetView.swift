@@ -118,7 +118,7 @@ struct TransferConfirmationSheetView: View {
             
             // Bottom Confirm Button
             VStack {
-                Button(action: {
+                PrimaryButton(title: "Confirm & Send") {
                     // Create transaction item
                     let transaction = TransactionItem(
                         date: Date(),
@@ -134,14 +134,6 @@ struct TransferConfirmationSheetView: View {
                     
                     // Push processing screen
                     router.push(.transferProcessing(transaction))
-                }) {
-                    Text("Confirm & Send")
-                        .typography(.body, weight: .bold)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 54)
-                        .background(Color.primaryBlack)
-                        .cornerRadius(12)
                 }
                 .padding(.horizontal, 24)
                 .padding(.vertical, 16)

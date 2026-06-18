@@ -63,46 +63,10 @@ struct TransferDestinationSelectView: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 24) {
                     // New Beneficiary Button Card
-                    Button(action: {
+                    PrimaryButton(title: "New Beneficiary", systemImageName: "plus") {
                         router.push(.transferInput(bank: nil, accountNumber: nil))
-                    }) {
-                        HStack(spacing: 16) {
-                            Circle()
-                                .fill(Color.primaryRed.opacity(0.1))
-                                .frame(width: 48, height: 48)
-                                .overlay(
-                                    Image(systemName: "plus")
-                                        .font(.system(size: 20, weight: .bold))
-                                        .foregroundColor(.primaryRed)
-                                )
-                            
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text("New Beneficiary")
-                                    .typography(.body, weight: .semibold)
-                                    .foregroundColor(.textPrimary)
-                                Text("Transfer to a new account number")
-                                    .typography(.footnote, weight: .regular)
-                                    .foregroundColor(.textSecondary)
-                            }
-                            
-                            Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 14, weight: .bold))
-                                .foregroundColor(.textSecondary)
-                        }
-                        .padding(16)
-                        .background(
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(Color.white)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .stroke(Color.black.opacity(0.05), lineWidth: 1)
-                                )
-                        )
-                        .shadow(color: Color.black.opacity(0.02), radius: 6, x: 0, y: 3)
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    .padding(.vertical, 16)
                     
                     // Saved Accounts List
                     VStack(alignment: .leading, spacing: 12) {

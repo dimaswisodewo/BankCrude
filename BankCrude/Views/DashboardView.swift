@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DashboardView: View {
+    @Environment(NavigationRouter.self) private var router
     @State private var activeCardIndex: Int = 0
     @State private var selectedItemMessage: String? = nil
     
@@ -144,7 +145,7 @@ struct DashboardView: View {
                 // Transaction History Section
                 VStack(alignment: .leading, spacing: 0) {
                     SectionHeaderView("Transaction History", buttonTitle: "See All") {
-                        print("Tapped See All")
+                        router.push(.allTransactions)
                     }
                     .padding(.horizontal, 24)
                     .padding(.top, 24)

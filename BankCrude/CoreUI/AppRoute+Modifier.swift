@@ -82,6 +82,8 @@ struct AppRouterView {
     @ViewBuilder
     static func handleNavigation(_ route: AppRoute) -> some View {
         switch route {
+        case .allTransactions:
+            AllTransactionsView()
         default:
             EmptyView()
         }

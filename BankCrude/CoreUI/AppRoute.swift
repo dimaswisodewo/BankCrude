@@ -8,6 +8,24 @@
 import Foundation
 import SwiftUI
 
+/// A generic wrapper for callbacks in navigation routes to make them conform to Hashable.
+struct NavigationCallback<T>: Hashable {
+    private let id = UUID()
+    let action: (T) -> Void
+    
+    init(_ action: @escaping (T) -> Void) {
+        self.action = action
+    }
+    
+    static func == (lhs: NavigationCallback<T>, rhs: NavigationCallback<T>) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
 /// Represents the navigation destinations within the app.
 enum AppRoute: Hashable, Identifiable {
     /// View showing all transaction history.
@@ -20,6 +38,10 @@ enum AppRoute: Hashable, Identifiable {
     case transferInput(bank: String?, accountNumber: String?)
     /// Loading screen simulating transfer processing.
     case transferProcessing(TransactionItem)
+    /// View for selecting destination bank.
+    case bankSelection(currentBank: String, banksSelection: [String], callback: NavigationCallback<String>)
+    /// View for confirming transfer details.
+    case transferConfirmation(bank: String, accountNumber: String, amount: Decimal, note: String?)
     
     var id: Self { self }
 }

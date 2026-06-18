@@ -9,13 +9,11 @@ import SwiftUI
 
 struct TransferConfirmationSheetView: View {
     @Environment(NavigationRouter.self) private var router
-    @Environment(\.dismiss) private var dismiss
     
     let bank: String
     let accountNumber: String
     let amount: Decimal
     let note: String?
-    @Binding var isPresented: Bool
     
     private var recipientName: String {
         // Simple mock lookup based on our saved accounts list
@@ -130,7 +128,7 @@ struct TransferConfirmationSheetView: View {
                     )
                     
                     // Dismiss confirmation sheet
-                    isPresented = false
+                    router.dismissSheet()
                     
                     // Push processing screen
                     router.push(.transferProcessing(transaction))
@@ -160,13 +158,11 @@ struct TransferConfirmationSheetView: View {
 }
 
 #Preview {
-    @Previewable @State var isPresented = true
-    return TransferConfirmationSheetView(
+    TransferConfirmationSheetView(
         bank: "Bank Crude",
         accountNumber: "0342039298",
         amount: 250000.00,
-        note: "Dinner contribution",
-        isPresented: $isPresented
+        note: "Dinner contribution"
     )
     .environment(NavigationRouter())
 }

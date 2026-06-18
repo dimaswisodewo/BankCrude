@@ -16,9 +16,6 @@ struct TransferInputView: View {
     @State private var accountNumber: String
     @State private var rawAmountString: String = ""
     @State private var note: String = ""
-    @State private var isShowingBankSheet = false
-    @State private var isShowingConfirmationSheet = false
-    
     // Quick amount options
     private let quickAmounts = [50000, 100000, 200000, 500000, 1000000]
     
@@ -68,8 +65,14 @@ struct TransferInputView: View {
                             .foregroundColor(.textPrimary)
                         
                         // Bank Selection Row
-                        Button(action: {
-                            isShowingBankSheet = true
+                        Button(action: { router.presentSheet(
+                            .bankSelection(
+                                currentBank: selectedBank,
+                                banksSelection: banks,
+                                callback: NavigationCallback { bank in
+                                    selectedBank = bank
+                                }
+                            ))
                         }) {
                             HStack {
                                 VStack(alignment: .leading, spacing: 4) {
@@ -235,7 +238,12 @@ struct TransferInputView: View {
             // Bottom Continue Area
             VStack {
                 PrimaryButton(title: "Continue") {
-                    isShowingConfirmationSheet = true
+                    router.presentSheet(.transferConfirmation(
+                        bank: selectedBank,
+                        accountNumber: accountNumber,
+                        amount: amountDecimal,
+                        note: note.isEmpty ? nil : note
+                    ))
                 }
                 .disabled(!isFormValid)
                 .padding(.horizontal, 24)
@@ -247,29 +255,18 @@ struct TransferInputView: View {
         .background(Color.backgroundWhite)
         .navigationTitle("Transfer Form")
         .navigationBarTitleDisplayMode(.inline)
-        .sheet(isPresented: $isShowingBankSheet) {
-            BankSelectionSheet(selectedBank: $selectedBank, banks: banks)
-        }
-        .sheet(isPresented: $isShowingConfirmationSheet) {
-            TransferConfirmationSheetView(
-                bank: selectedBank,
-                accountNumber: accountNumber,
-                amount: amountDecimal,
-                note: note.isEmpty ? nil : note,
-                isPresented: $isShowingConfirmationSheet
-            )
-        }
     }
 }
 
 // MARK: - Bank Selection Sheet
 struct BankSelectionSheet: View {
-    @Binding var selectedBank: String
+    @Environment(NavigationRouter.self) private var router
+    let selectedBank: String
     let banks: [String]
+    let callback: NavigationCallback<String>
     
     @State private var searchText = ""
     @State private var debouncedSearchText = ""
-    @Environment(\.dismiss) private var dismiss
     
     private var filteredBanks: [String] {
         if debouncedSearchText.isEmpty {
@@ -299,8 +296,8 @@ struct BankSelectionSheet: View {
                 List {
                     ForEach(filteredBanks, id: \.self) { bank in
                         Button(action: {
-                            selectedBank = bank
-                            dismiss()
+                            callback.action(bank)
+                            router.dismissSheet()
                         }) {
                             HStack {
                                 Text(bank)
@@ -323,7 +320,7 @@ struct BankSelectionSheet: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Close") {
-                        dismiss()
+                        router.dismissSheet()
                     }
                     .typography(.body, weight: .bold)
                     .foregroundColor(.primaryRed)

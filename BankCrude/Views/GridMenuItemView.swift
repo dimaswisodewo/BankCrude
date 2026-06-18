@@ -95,7 +95,7 @@ public struct GridMenuItemView: View {
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(Color.primaryRed, lineWidth: 1)
             )
-            .cornerRibbon("NEW", gradient: .ribbonRed, isVisible: item.isNewFeature)
+            .cornerRibbon("NEW", gradient: .ribbonGold, isVisible: item.isNewFeature)
             .clipShape(RoundedRectangle(cornerRadius: 16))
             .shadow(color: Color.black.opacity(0.04), radius: 6, x: 0, y: 3)
         }

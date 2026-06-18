@@ -84,14 +84,21 @@ struct AppRouterView {
         switch route {
         case .allTransactions:
             AllTransactionsView()
+        
         case .transactionReceipt(let transaction, let isFromTransfer):
             TransactionReceiptView(transaction: transaction, isFromTransfer: isFromTransfer)
+        
         case .transferDestinationSelect:
             TransferDestinationSelectView()
+        
         case .transferInput(let bank, let accountNumber):
             TransferInputView(prefilledBank: bank, prefilledAccountNumber: accountNumber)
+        
         case .transferProcessing(let transaction):
             TransferProcessingView(transaction: transaction)
+        
+        default:
+            EmptyView()
         }
     }
     
@@ -99,6 +106,23 @@ struct AppRouterView {
     @ViewBuilder
     static func handlePresentation(_ route: AppRoute) -> some View {
         switch route {
+        case .bankSelection(let currentBank, let banks, let callback):
+            BankSelectionSheet(
+                selectedBank: currentBank,
+                banks: banks,
+                callback: callback
+            )
+            .presentationDetents([.large])
+            
+        case .transferConfirmation(let bank, let accountNumber, let amount, let note):
+            TransferConfirmationSheetView(
+                bank: bank,
+                accountNumber: accountNumber,
+                amount: amount,
+                note: note
+            )
+            .presentationDetents([.medium])
+            
         default:
             EmptyView()
                 .presentationDetents([.medium, .large])

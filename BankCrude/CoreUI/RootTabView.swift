@@ -40,6 +40,8 @@ struct RootTabView: View {
         switch tab {
         case .dashboard:
             DashboardView()
+        case .transactions:
+            TransactionsView()
         case .notifications:
             NotificationsView()
         default:

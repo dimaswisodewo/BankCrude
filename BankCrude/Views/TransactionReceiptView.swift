@@ -191,8 +191,8 @@ struct ScaleButtonStyle: ButtonStyle {
             TransactionReceiptView(
                 transaction: TransactionItem(
                     date: Date(),
-                    title: "Meynabel Dimas Wisodewo",
-                    subtitle: "Transfer to BCA Account",
+                    title: "Aditya Pratama",
+                    subtitle: "Transfer to BCA Account (0342039298)",
                     amount: 50000.00,
                     type: .outflow,
                     status: .success

@@ -31,8 +31,8 @@ struct AllTransactionsView: View {
         return [
             TransactionItem(
                 date: baseDate,
-                title: "Meynabel Dimas Wisodewo",
-                subtitle: "Transfer to BCA Account",
+                title: "Aditya Pratama",
+                subtitle: "Transfer to BCA Account (0342039298)",
                 amount: 50000.00,
                 type: .outflow,
                 status: .success
@@ -63,8 +63,8 @@ struct AllTransactionsView: View {
             ),
             TransactionItem(
                 date: calendar.date(byAdding: .day, value: -2, to: baseDate) ?? baseDate,
-                title: "Meynabel Dimas Wisodewo",
-                subtitle: "Received from Radhita Salsabila - CIMB Account",
+                title: "Radhita Salsabila",
+                subtitle: "Received from CIMB Account",
                 amount: 99000000.00,
                 type: .inflow,
                 status: nil
@@ -79,7 +79,7 @@ struct AllTransactionsView: View {
             ),
             TransactionItem(
                 date: calendar.date(byAdding: .day, value: -3, to: baseDate) ?? baseDate,
-                title: "Meynabel Dimas Wisodewo",
+                title: "Agus Subagja",
                 subtitle: "Transfer to Bank Jago Account",
                 amount: 2000000.00,
                 type: .outflow,
@@ -87,8 +87,8 @@ struct AllTransactionsView: View {
             ),
             TransactionItem(
                 date: calendar.date(byAdding: .day, value: -4, to: baseDate) ?? baseDate,
-                title: "Meynabel Dimas Wisodewo",
-                subtitle: "Virtual Account Transfer to BCA Account",
+                title: "Tokopedia",
+                subtitle: "Virtual Account BCA Payment",
                 amount: 250000.00,
                 type: .outflow,
                 status: .success

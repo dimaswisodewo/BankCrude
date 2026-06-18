@@ -26,7 +26,9 @@ struct TransferDestinationSelectView: View {
         SavedAccount(name: "Dewi Lestari", bank: "Bank Jago", accountNumber: "9038481234", initials: "DL"),
         SavedAccount(name: "Budi Santoso", bank: "BRI", accountNumber: "0192840294", initials: "BS"),
         SavedAccount(name: "Siti Rahma", bank: "BNI", accountNumber: "7283940192", initials: "SR"),
-        SavedAccount(name: "Aditya Pratama", bank: "BCA", accountNumber: "8293849102", initials: "AP")
+        SavedAccount(name: "Aditya Pratama", bank: "BCA", accountNumber: "8293849102", initials: "AP"),
+        SavedAccount(name: "Joe Cowy", bank: "Bank Crude", accountNumber: "8295842162", initials: "JC"),
+        SavedAccount(name: "Geeb Run", bank: "Bank Crude", accountNumber: "8211845363", initials: "GR")
     ]
     
     private var filteredAccounts: [SavedAccount] {

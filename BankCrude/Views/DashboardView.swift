@@ -12,6 +12,9 @@ struct DashboardView: View {
     @State private var activeCardIndex: Int = 0
     @State private var selectedItemMessage: String? = nil
     
+    // Layout Constants
+    private let sectionSpacing: CGFloat = 32
+    
     let mockCards = [
         CardItem(
             accountType: "Saving Account",
@@ -101,10 +104,10 @@ struct DashboardView: View {
                 }
                 .padding(.horizontal, 24)
                 .padding(.top, 24)
-                .padding(.bottom, 24)
+                .padding(.bottom, 16) // Visual grouping: closer to the Card Carousel
                 
                 // Carousel & Indicator Container
-                VStack(spacing: 16) {
+                VStack(spacing: 12) { // Slightly tighter spacing to keep dot indicators grouped
                     CardCarouselView(
                         items: mockCards,
                         activeIndex: $activeCardIndex,
@@ -140,7 +143,7 @@ struct DashboardView: View {
                     }
                 }
                 .padding(.horizontal, 24)
-                .padding(.top, 24)
+                .padding(.top, sectionSpacing)
                 
                 // Quick Access Section
                 QuickAccessView(
@@ -155,11 +158,11 @@ struct DashboardView: View {
                     }
                 )
                 .padding(.horizontal, 24)
-                .padding(.top, 24)
+                .padding(.top, sectionSpacing)
                 
                 // Promo Section
                 PromoCarouselView()
-                    .padding(.top, 24)
+                    .padding(.top, sectionSpacing)
                 
                 // Transaction History Section
                 VStack(alignment: .leading, spacing: 0) {
@@ -167,7 +170,6 @@ struct DashboardView: View {
                         router.push(.allTransactions)
                     }
                     .padding(.horizontal, 24)
-                    .padding(.top, 24)
                     .padding(.bottom, 8)
                     
                     VStack(spacing: 0) {
@@ -187,7 +189,8 @@ struct DashboardView: View {
                         }
                     }
                 }
-                .padding(.bottom, 24)
+                .padding(.top, sectionSpacing)
+                .padding(.bottom, 40) // Generous bottom padding for better scroll feel
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

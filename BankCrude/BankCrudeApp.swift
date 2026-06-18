@@ -15,6 +15,7 @@ struct BankCrudeApp: App {
         WindowGroup {
             RootTabView()
                 .environment(router)
+                .withSplashScreen()
         }
     }
 }

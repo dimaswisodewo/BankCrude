@@ -31,56 +31,137 @@ struct DashboardView: View {
         )
     ]
     
+    private var mockTransactions: [TransactionItem] {
+        let calendar = Calendar.current
+        let baseDate = calendar.date(from: DateComponents(year: 2026, month: 6, day: 24)) ?? Date()
+        
+        return [
+            TransactionItem(
+                date: baseDate,
+                title: "Meynabel Dimas Wisodewo",
+                subtitle: "Transfer to BCA Account",
+                amount: 50000.00,
+                type: .outflow,
+                status: .success
+            ),
+            TransactionItem(
+                date: calendar.date(byAdding: .day, value: -2, to: baseDate) ?? baseDate,
+                title: "Meynabel Dimas Wisodewo",
+                subtitle: "Received from Radhita Salsabila - CIMB Account",
+                amount: 99000000.00,
+                type: .inflow,
+                status: nil
+            ),
+            TransactionItem(
+                date: calendar.date(byAdding: .day, value: -3, to: baseDate) ?? baseDate,
+                title: "Meynabel Dimas Wisodewo",
+                subtitle: "Transfer to Bank Jago Account",
+                amount: 2000000.00,
+                type: .outflow,
+                status: .failed
+            ),
+            TransactionItem(
+                date: calendar.date(byAdding: .day, value: -4, to: baseDate) ?? baseDate,
+                title: "Meynabel Dimas Wisodewo",
+                subtitle: "Virtual Account Transfer to BCA Account",
+                amount: 250000.00,
+                type: .outflow,
+                status: .success
+            )
+        ]
+    }
+    
     var body: some View {
-        VStack(spacing: 0) {
-            // Header Section
-            HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Welcome Back,")
-                        .typography(.caption, weight: .regular)
-                        .foregroundColor(.textSecondary)
-                    Text("John Doe")
-                        .typography(.headline, weight: .semibold)
-                        .foregroundColor(.textPrimary)
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack(spacing: 0) {
+                // Header Section
+                HStack {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Welcome Back,")
+                            .typography(.caption, weight: .regular)
+                            .foregroundColor(.textSecondary)
+                        Text("John Doe")
+                            .typography(.headline, weight: .semibold)
+                            .foregroundColor(.textPrimary)
+                    }
+                    Spacer()
+                    
+                    Button {
+                        // Profile/Account action
+                    } label: {
+                        Image(systemName: "person.crop.circle.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(.textSecondary)
+                    }
+                    .buttonStyle(.plain)
                 }
-                Spacer()
+                .padding(.horizontal, 24)
+                .padding(.top, 24)
+                .padding(.bottom, 24)
                 
-                Button {
-                    // Profile/Account action
-                } label: {
-                    Image(systemName: "person.crop.circle.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 40, height: 40)
-                        .foregroundColor(.textSecondary)
+                // Carousel & Indicator Container
+                VStack(spacing: 16) {
+                    CardCarouselView(
+                        items: mockCards,
+                        activeIndex: $activeCardIndex,
+                        itemWidth: 325,
+                        spacing: 16
+                    ) { card in
+                        CardView(item: card) {
+                            print("Tapped detail for \(card.accountType)")
+                        }
+                    }
+                    .frame(height: 220) // Frame allows card shadow to render without clipping
+                    
+                    DotPageIndicator(
+                        totalCount: mockCards.count,
+                        currentIndex: $activeCardIndex
+                    )
                 }
-                .buttonStyle(.plain)
-            }
-            .padding(.horizontal, 24)
-            .padding(.top, 24)
-            .padding(.bottom, 24)
-            
-            // Carousel & Indicator Container
-            VStack(spacing: 16) {
-                CardCarouselView(
-                    items: mockCards,
-                    activeIndex: $activeCardIndex,
-                    itemWidth: 325,
-                    spacing: 16
-                ) { card in
-                    CardView(item: card) {
-                        print("Tapped detail for \(card.accountType)")
+                
+                // Transaction History Section
+                VStack(alignment: .leading, spacing: 0) {
+                    HStack {
+                        Text("Transaction History")
+                            .typography(.title3, weight: .bold)
+                            .foregroundColor(.textPrimary)
+                        
+                        Spacer()
+                        
+                        Button {
+                            print("Tapped See All")
+                        } label: {
+                            Text("See All")
+                                .typography(.subheadline, weight: .semibold)
+                                .foregroundColor(.primaryRed)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    .padding(.horizontal, 24)
+                    .padding(.top, 24)
+                    .padding(.bottom, 8)
+                    
+                    VStack(spacing: 0) {
+                        ForEach(mockTransactions) { transaction in
+                            TransactionRowView(
+                                transaction: transaction,
+                                onTap: transaction.type == .outflow ? {
+                                    print("Tapped transaction detail for \(transaction.amountString)")
+                                } : nil
+                            )
+                            
+                            if transaction.id != mockTransactions.last?.id {
+                                Divider()
+                                    .background(Color.black.opacity(0.06))
+                                    .padding(.horizontal, 24)
+                            }
+                        }
                     }
                 }
-                .frame(height: 220) // Frame allows card shadow to render without clipping
-                
-                DotPageIndicator(
-                    totalCount: mockCards.count,
-                    currentIndex: $activeCardIndex
-                )
+                .padding(.bottom, 24)
             }
-            
-            Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.backgroundWhite)

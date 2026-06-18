@@ -44,5 +44,13 @@ public extension Color {
     
     static let textPrimary = Color(hex: "010400")
     static let textSecondary = Color(hex: "808080")
+    
+    // Transaction & Status colors
+    static let transactionGreen = Color(hex: "1B873F")
+    static let transactionRed = Color(hex: "E9190F")
+    static let successGreen = Color(hex: "1B873F")
+    static let successGreenBg = Color(hex: "E8F5E9")
+    static let failedRed = Color(hex: "E9190F")
+    static let failedRedBg = Color(hex: "FFEBEE")
 }
 

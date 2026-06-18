@@ -155,9 +155,9 @@ struct DashboardView: View {
                         ForEach(mockTransactions) { transaction in
                             TransactionRowView(
                                 transaction: transaction,
-                                onTap: transaction.type == .outflow ? {
-                                    print("Tapped transaction detail for \(transaction.amountString)")
-                                } : nil
+                                onTap: {
+                                    router.push(.transactionReceipt(transaction))
+                                }
                             )
                             
                             if transaction.id != mockTransactions.last?.id {

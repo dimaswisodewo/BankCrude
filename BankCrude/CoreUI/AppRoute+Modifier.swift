@@ -84,8 +84,8 @@ struct AppRouterView {
         switch route {
         case .allTransactions:
             AllTransactionsView()
-        default:
-            EmptyView()
+        case .transactionReceipt(let transaction):
+            TransactionReceiptView(transaction: transaction)
         }
     }
     

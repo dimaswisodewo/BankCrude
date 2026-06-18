@@ -12,6 +12,8 @@ import SwiftUI
 enum AppRoute: Hashable, Identifiable {
     /// View showing all transaction history.
     case allTransactions
+    /// View showing transaction receipt details / acknowledgement.
+    case transactionReceipt(TransactionItem)
     
     var id: Self { self }
 }

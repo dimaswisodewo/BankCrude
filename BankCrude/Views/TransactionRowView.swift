@@ -43,7 +43,7 @@ public enum TransactionStatus: String, Codable {
 }
 
 /// Data model representing a transaction item.
-public struct TransactionItem: Identifiable, Equatable {
+public struct TransactionItem: Identifiable, Equatable, Hashable {
     public let id: UUID
     public let date: Date
     public let title: String

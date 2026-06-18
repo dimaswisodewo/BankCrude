@@ -99,12 +99,12 @@ public struct GridMenuItemView: View {
             .clipShape(RoundedRectangle(cornerRadius: 16))
             .shadow(color: Color.black.opacity(0.04), radius: 6, x: 0, y: 3)
         }
-        .buttonStyle(ScaleButtonStyle())
+        .buttonStyle(CustomScaleButtonStyle())
     }
 }
 
 /// A button style that implements a scaling animation when pressed, enhancing visual feedback.
-public struct ScaleButtonStyle: ButtonStyle {
+public struct CustomScaleButtonStyle: ButtonStyle {
     public init() {}
     
     public func makeBody(configuration: Configuration) -> some View {

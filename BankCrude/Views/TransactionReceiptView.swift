@@ -12,9 +12,15 @@ struct TransactionReceiptView: View {
     let transaction: TransactionItem
     let isFromTransfer: Bool
     
+    @State private var isDestinationSaved: Bool
+    @State private var toastMessage: String? = nil
+    
     init(transaction: TransactionItem, isFromTransfer: Bool = false) {
         self.transaction = transaction
         self.isFromTransfer = isFromTransfer
+        
+        let savedNames = ["Radhita Salsabila", "Agus Subagja", "Dewi Lestari", "Budi Santoso", "Siti Rahma", "Aditya Pratama", "Joe Cowy", "Geeb Run"]
+        self._isDestinationSaved = State(initialValue: savedNames.contains(transaction.title))
     }
     
     private var status: TransactionStatus {
@@ -129,6 +135,50 @@ struct TransactionReceiptView: View {
                                     .stroke(Color.black.opacity(0.05), lineWidth: 1)
                             )
                     )
+                    
+                    // Save Destination Card
+                    if transaction.type == .outflow {
+                        HStack(spacing: 16) {
+                            Image(systemName: isDestinationSaved ? "bookmark.fill" : "bookmark")
+                                .font(.system(size: 20))
+                                .foregroundColor(isDestinationSaved ? .primaryRed : .textSecondary)
+                                .frame(width: 24, height: 24)
+                                .contentTransition(.symbolEffect(.replace))
+                            
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(isDestinationSaved ? "Destination Saved" : "Save Destination")
+                                    .typography(.body, weight: .semibold)
+                                    .foregroundColor(.textPrimary)
+                                Text(isDestinationSaved ? "This account is saved to your transfer list" : "Keep this account for future transfers")
+                                    .typography(.footnote, weight: .regular)
+                                    .foregroundColor(.textSecondary)
+                            }
+                            
+                            Spacer()
+                            
+                            Toggle("", isOn: Binding(
+                                get: { isDestinationSaved },
+                                set: { newValue in
+                                    withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                        isDestinationSaved = newValue
+                                        toastMessage = newValue ? "Destination saved successfully" : "Destination unsaved"
+                                    }
+                                }
+                            ))
+                            .tint(.primaryRed)
+                            .labelsHidden()
+                        }
+                        .padding(16)
+                        .background(
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(Color.white)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .stroke(Color.black.opacity(0.05), lineWidth: 1)
+                                )
+                        )
+                        .shadow(color: Color.black.opacity(0.02), radius: 6, x: 0, y: 3)
+                    }
                 }
                 .padding(.horizontal, 24)
                 .padding(.bottom, 24)
@@ -158,6 +208,7 @@ struct TransactionReceiptView: View {
         .navigationTitle("Receipt")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(isFromTransfer)
+        .toast(message: $toastMessage, backgroundColor: .toastBlue)
     }
     
     private func detailRow(label: String, value: String) -> some View {

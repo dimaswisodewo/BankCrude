@@ -159,7 +159,7 @@ public struct TransactionRowView: View {
                 
                 if let status = transaction.status {
                     Text(status.rawValue.capitalized)
-                        .typography(.caption, weight: .medium)
+                        .typography(.caption, weight: .semibold)
                         .padding(.horizontal, 10)
                         .padding(.vertical, 4)
                         .background(status.backgroundColor)

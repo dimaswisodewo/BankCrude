@@ -93,7 +93,7 @@ struct NotificationsView: View {
                 title: "System Update",
                 amount: nil,
                 type: .general,
-                detail: "BankCrude systems will undergo scheduled maintenance on 21 June 2026, 01:00 - 04:00 WIB. Some services may be temporarily unavailable.",
+                detail: "Bank Crude systems will undergo scheduled maintenance on 21 June 2026, 01:00 - 04:00 WIB. Some services may be temporarily unavailable.",
                 isUnread: false
             ),
             

@@ -52,5 +52,6 @@ public extension Color {
     static let successGreenBg = Color(hex: "E8F5E9")
     static let failedRed = Color(hex: "E9190F")
     static let failedRedBg = Color(hex: "FFEBEE")
+    static let toastBlue = Color(hex: "0A7EFA")
 }
 

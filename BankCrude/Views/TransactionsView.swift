@@ -182,24 +182,7 @@ struct TransactionsView: View {
                     .transition(.opacity)
                 }
             }
-            .overlay(
-                // Floating premium toast for taps
-                VStack {
-                    Spacer()
-                    if let message = selectedItemMessage {
-                        Text(message)
-                            .typography(.footnote, weight: .semibold)
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 10)
-                            .background(Color.primaryBlack.opacity(0.85))
-                            .cornerRadius(24)
-                            .shadow(radius: 5)
-                            .transition(.move(edge: .bottom).combined(with: .opacity))
-                            .padding(.bottom, 20)
-                    }
-                }
-            )
+            .toast(message: $selectedItemMessage)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.backgroundWhite)
@@ -208,17 +191,7 @@ struct TransactionsView: View {
     @ViewBuilder
     private func gridItemView(for item: GridMenuItem) -> some View {
         GridMenuItemView(item: item) {
-            withAnimation(.spring()) {
-                selectedItemMessage = "You tapped: \(item.title)"
-            }
-            // Auto-dismiss message after 2 seconds
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                if selectedItemMessage == "You tapped: \(item.title)" {
-                    withAnimation {
-                        selectedItemMessage = nil
-                    }
-                }
-            }
+            selectedItemMessage = "You tapped: \(item.title)"
         }
     }
 }

@@ -32,9 +32,15 @@ public struct SectionHeaderView: View {
             
             if let buttonTitle, let buttonAction {
                 Button(action: buttonAction) {
-                    Text(buttonTitle)
-                        .typography(.subheadline, weight: .semibold)
-                        .foregroundColor(.primaryRed)
+                    VStack(spacing: 2) {
+                        Text(buttonTitle)
+                            .typography(.subheadline, weight: .bold)
+                            .foregroundColor(.textPrimary)
+                            .overlay(alignment: .bottom) {
+                                Color.primaryRed
+                                    .frame(height: 2)
+                            }
+                    }
                 }
                 .buttonStyle(.plain)
             }

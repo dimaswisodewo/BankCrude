@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DashboardView: View {
     @State private var activeCardIndex: Int = 0
+    @State private var selectedItemMessage: String? = nil
     
     let mockCards = [
         CardItem(
@@ -121,6 +122,21 @@ struct DashboardView: View {
                     )
                 }
                 
+                // Quick Access Section
+                QuickAccessView(
+                    onItemTap: { item in
+                        selectedItemMessage = "Tapped: \(item.title)"
+                    },
+                    onEditTap: {
+                        selectedItemMessage = "Tapped Edit Quick Access"
+                    },
+                    onAddTap: {
+                        selectedItemMessage = "Tapped Add Quick Access"
+                    }
+                )
+                .padding(.horizontal, 24)
+                .padding(.top, 24)
+                
                 // Transaction History Section
                 VStack(alignment: .leading, spacing: 0) {
                     SectionHeaderView("Transaction History", buttonTitle: "See All") {
@@ -152,6 +168,7 @@ struct DashboardView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.backgroundWhite)
+        .toast(message: $selectedItemMessage)
     }
 }
 

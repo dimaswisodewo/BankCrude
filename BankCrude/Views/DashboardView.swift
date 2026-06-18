@@ -123,21 +123,8 @@ struct DashboardView: View {
                 
                 // Transaction History Section
                 VStack(alignment: .leading, spacing: 0) {
-                    HStack {
-                        Text("Transaction History")
-                            .typography(.title3, weight: .bold)
-                            .foregroundColor(.textPrimary)
-                        
-                        Spacer()
-                        
-                        Button {
-                            print("Tapped See All")
-                        } label: {
-                            Text("See All")
-                                .typography(.subheadline, weight: .semibold)
-                                .foregroundColor(.primaryRed)
-                        }
-                        .buttonStyle(.plain)
+                    SectionHeaderView("Transaction History", buttonTitle: "See All") {
+                        print("Tapped See All")
                     }
                     .padding(.horizontal, 24)
                     .padding(.top, 24)

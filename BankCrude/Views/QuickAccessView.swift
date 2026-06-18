@@ -37,7 +37,7 @@ public struct QuickAccessView: View {
         .menuItem(GridMenuItem(title: "PLN Electricity", iconName: "lightbulb")),
         .menuItem(GridMenuItem(title: "PDAM", iconName: "drop")),
         .menuItem(GridMenuItem(title: "Credit Card", iconName: "creditcard")),
-        .menuItem(GridMenuItem(title: "Installment", iconName: "creditcard.trianglebadge.exclamationmark")),
+        .menuItem(GridMenuItem(title: "Installment", iconName: "creditcard.trianglebadge.exclamationmark", isNewFeature: true)),
         .add
     ]
     

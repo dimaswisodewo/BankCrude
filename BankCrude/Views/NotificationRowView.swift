@@ -22,6 +22,7 @@ public struct NotificationItem: Identifiable, Equatable {
     public let amount: Decimal?
     public let type: NotificationType
     public let detail: String
+    public let isUnread: Bool
     
     public init(
         id: UUID = UUID(),
@@ -29,7 +30,8 @@ public struct NotificationItem: Identifiable, Equatable {
         title: String,
         amount: Decimal?,
         type: NotificationType,
-        detail: String
+        detail: String,
+        isUnread: Bool = false
     ) {
         self.id = id
         self.date = date
@@ -37,6 +39,7 @@ public struct NotificationItem: Identifiable, Equatable {
         self.amount = amount
         self.type = type
         self.detail = detail
+        self.isUnread = isUnread
     }
     
     /// Formats the date to match the "16 June 2026" visual representation.
@@ -98,6 +101,7 @@ public struct NotificationRowView: View {
         .padding(.horizontal, 24)
         .contentShape(Rectangle())
         .background(Color.backgroundWhite)
+        .cornerRibbon("NEW", gradient: .ribbonBlue, isVisible: notification.isUnread)
     }
     
     @ViewBuilder
@@ -159,21 +163,24 @@ public struct NotificationRowView: View {
             title: "Cashflow - Spending",
             amount: 50000.00,
             type: .spending,
-            detail: "to Meynabel Dimas Wisodewo - Bank Jago at Investment Category"
+            detail: "to Meynabel Dimas Wisodewo - Bank Jago at Investment Category",
+            isUnread: true
         ),
         NotificationItem(
             date: date,
             title: "Cashflow - Spending",
             amount: 10050000.00,
             type: .spending,
-            detail: "at Shopping"
+            detail: "at Shopping",
+            isUnread: false
         ),
         NotificationItem(
             date: date,
             title: "Cashflow - Income",
             amount: 2150000.00,
             type: .income,
-            detail: "from Meynabel Dimas Wisodewo at Shopping Category"
+            detail: "from Meynabel Dimas Wisodewo at Shopping Category",
+            isUnread: true
         ),
         NotificationItem(
             date: date,

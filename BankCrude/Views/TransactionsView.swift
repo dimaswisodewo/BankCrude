@@ -31,7 +31,7 @@ struct TransactionsView: View {
                 GridMenuItem(title: "Transfer Same Bank", iconName: "arrow.up"),
                 GridMenuItem(title: "Transfer Other Bank", iconName: "building.columns"),
                 GridMenuItem(title: "Virtual Account", iconName: "banknote"),
-                GridMenuItem(title: "Proxy Address", iconName: "globe")
+                GridMenuItem(title: "Proxy Address", iconName: "globe", isNewFeature: true)
             ]
         ),
         TransactionSection(
@@ -62,7 +62,7 @@ struct TransactionsView: View {
             items: [
                 GridMenuItem(title: "E-Money", iconName: "wallet.pass"),
                 GridMenuItem(title: "Mobile Legends", iconName: "gamecontroller"),
-                GridMenuItem(title: "Genshin Impact", iconName: "gamecontroller")
+                GridMenuItem(title: "Genshin Impact", iconName: "gamecontroller", isNewFeature: true)
             ]
         )
     ]

@@ -13,6 +13,7 @@ public struct GridMenuItem: Identifiable, Equatable, Sendable {
     public let title: String
     public let iconName: String
     public let isSystemIcon: Bool
+    public let isNewFeature: Bool
     
     /// Initializes a GridMenuItem.
     /// - Parameters:
@@ -20,16 +21,19 @@ public struct GridMenuItem: Identifiable, Equatable, Sendable {
     ///   - title: The display title of the menu item.
     ///   - iconName: The name of the icon (SF Symbol or custom asset name).
     ///   - isSystemIcon: A boolean flag indicating if `iconName` refers to an SF Symbol. Defaults to true.
+    ///   - isNewFeature: A boolean flag indicating if this menu item represents a new feature. Defaults to false.
     public init(
         id: UUID = UUID(),
         title: String,
         iconName: String,
-        isSystemIcon: Bool = true
+        isSystemIcon: Bool = true,
+        isNewFeature: Bool = false
     ) {
         self.id = id
         self.title = title
         self.iconName = iconName
         self.isSystemIcon = isSystemIcon
+        self.isNewFeature = isNewFeature
     }
 }
 
@@ -91,6 +95,8 @@ public struct GridMenuItemView: View {
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(Color.primaryRed, lineWidth: 1)
             )
+            .cornerRibbon("NEW", gradient: .ribbonRed, isVisible: item.isNewFeature)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
             .shadow(color: Color.black.opacity(0.04), radius: 6, x: 0, y: 3)
         }
         .buttonStyle(ScaleButtonStyle())

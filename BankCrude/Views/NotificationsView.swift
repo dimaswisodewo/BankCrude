@@ -18,28 +18,32 @@ struct NotificationsView: View {
                 title: "Cashflow - Spending",
                 amount: 50000.00,
                 type: .spending,
-                detail: "to Meynabel Dimas Wisodewo - Bank Jago at Investment Category"
+                detail: "to Meynabel Dimas Wisodewo - Bank Jago at Investment Category",
+                isUnread: true
             ),
             NotificationItem(
                 date: date,
                 title: "Cashflow - Spending",
                 amount: 10050000.00,
                 type: .spending,
-                detail: "at Shopping"
+                detail: "at Shopping",
+                isUnread: false
             ),
             NotificationItem(
                 date: date,
                 title: "Cashflow - Income",
                 amount: 2150000.00,
                 type: .income,
-                detail: "from Meynabel Dimas Wisodewo at Shopping Category"
+                detail: "from Meynabel Dimas Wisodewo at Shopping Category",
+                isUnread: true
             ),
             NotificationItem(
                 date: date,
                 title: "Cashflow - Income",
                 amount: 2150000.00,
                 type: .income,
-                detail: "from Meynabel Dimas Wisodewo at Shopping Category"
+                detail: "from Meynabel Dimas Wisodewo at Shopping Category",
+                isUnread: false
             )
         ]
     }

@@ -47,9 +47,7 @@ public struct ToastModifier: ViewModifier {
                 }
                 .animation(.spring(response: 0.35, dampingFraction: 0.7, blendDuration: 0), value: message)
             )
-            .onChange(of: message) { _, newValue in
-                guard let newValue = newValue else { return }
-                
+            .onChange(of: message) { _, _ in
                 // Cancel any pending dismissal task so we don't dismiss early on rapid clicks
                 dismissTask?.cancel()
                 

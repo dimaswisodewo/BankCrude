@@ -81,7 +81,7 @@ struct DashboardView: View {
                         Text("Welcome Back,")
                             .typography(.caption, weight: .regular)
                             .foregroundColor(.textSecondary)
-                        Text("John Doe")
+                        Text("Meynabel Dimas Wisodewo")
                             .typography(.headline, weight: .semibold)
                             .foregroundColor(.textPrimary)
                     }
@@ -136,6 +136,10 @@ struct DashboardView: View {
                 )
                 .padding(.horizontal, 24)
                 .padding(.top, 24)
+                
+                // Promo Section
+                PromoCarouselView()
+                    .padding(.top, 24)
                 
                 // Transaction History Section
                 VStack(alignment: .leading, spacing: 0) {

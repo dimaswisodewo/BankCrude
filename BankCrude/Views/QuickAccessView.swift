@@ -76,17 +76,14 @@ public struct QuickAccessView: View {
                     Button(action: onAddTap) {
                         VStack {
                             Spacer()
-                            Image(systemName: "plus")
-                                .font(.system(size: 20, weight: .bold))
-                                .foregroundColor(.primaryRed)
+                            Circle()
+                                .fill(Color.primaryRed.opacity(0.1))
                                 .frame(width: 48, height: 48)
-                                .background(Color.white)
-                                .clipShape(Circle())
                                 .overlay(
-                                    Circle()
-                                        .stroke(Color.primaryRed, lineWidth: 1.5)
+                                    Image(systemName: "plus")
+                                        .font(.system(size: 20, weight: .bold))
+                                        .foregroundColor(.primaryRed)
                                 )
-                                .shadow(color: Color.black.opacity(0.04), radius: 6, x: 0, y: 3)
                             Spacer()
                         }
                         .frame(maxWidth: .infinity)

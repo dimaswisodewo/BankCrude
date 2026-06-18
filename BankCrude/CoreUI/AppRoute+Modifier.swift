@@ -84,8 +84,14 @@ struct AppRouterView {
         switch route {
         case .allTransactions:
             AllTransactionsView()
-        case .transactionReceipt(let transaction):
-            TransactionReceiptView(transaction: transaction)
+        case .transactionReceipt(let transaction, let isFromTransfer):
+            TransactionReceiptView(transaction: transaction, isFromTransfer: isFromTransfer)
+        case .transferDestinationSelect:
+            TransferDestinationSelectView()
+        case .transferInput(let bank, let accountNumber):
+            TransferInputView(prefilledBank: bank, prefilledAccountNumber: accountNumber)
+        case .transferProcessing(let transaction):
+            TransferProcessingView(transaction: transaction)
         }
     }
     

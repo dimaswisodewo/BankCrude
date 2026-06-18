@@ -13,7 +13,13 @@ enum AppRoute: Hashable, Identifiable {
     /// View showing all transaction history.
     case allTransactions
     /// View showing transaction receipt details / acknowledgement.
-    case transactionReceipt(TransactionItem)
+    case transactionReceipt(TransactionItem, isFromTransfer: Bool)
+    /// View showing saved accounts and "New Beneficiary" option.
+    case transferDestinationSelect
+    /// View for inputting transfer details (bank, account number).
+    case transferInput(bank: String?, accountNumber: String?)
+    /// Loading screen simulating transfer processing.
+    case transferProcessing(TransactionItem)
     
     var id: Self { self }
 }

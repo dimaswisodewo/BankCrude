@@ -308,7 +308,7 @@ struct AllTransactionsView: View {
                                         TransactionRowView(
                                             transaction: transaction,
                                             onTap: {
-                                                router.push(.transactionReceipt(transaction))
+                                                router.push(.transactionReceipt(transaction, isFromTransfer: false))
                                             }
                                         )
                                         

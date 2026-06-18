@@ -10,6 +10,12 @@ import SwiftUI
 struct TransactionReceiptView: View {
     @Environment(NavigationRouter.self) private var router
     let transaction: TransactionItem
+    let isFromTransfer: Bool
+    
+    init(transaction: TransactionItem, isFromTransfer: Bool = false) {
+        self.transaction = transaction
+        self.isFromTransfer = isFromTransfer
+    }
     
     private var status: TransactionStatus {
         transaction.status ?? .success
@@ -151,6 +157,7 @@ struct TransactionReceiptView: View {
         .background(Color.backgroundWhite)
         .navigationTitle("Receipt")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(isFromTransfer)
     }
     
     private func detailRow(label: String, value: String) -> some View {

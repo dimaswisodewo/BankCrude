@@ -129,7 +129,7 @@ struct DashboardView: View {
                         title: "Transfer",
                         systemImageName: "arrowshape.turn.up.left.fill"
                     ) {
-                        selectedItemMessage = "Tapped Transfer"
+                        router.push(.transferDestinationSelect)
                     }
                     
                     PrimaryButton(
@@ -175,7 +175,7 @@ struct DashboardView: View {
                             TransactionRowView(
                                 transaction: transaction,
                                 onTap: {
-                                    router.push(.transactionReceipt(transaction))
+                                    router.push(.transactionReceipt(transaction, isFromTransfer: false))
                                 }
                             )
                             

@@ -1,0 +1,61 @@
+# Xcode
+#
+# Reference: https://github.com/github/gitignore/blob/main/Swift.gitignore
+
+# Xcode User Data
+xcuserdata/
+*.xcuserdata
+*.mode1v3
+*.mode2v3
+*.nib
+*.perspectivev3
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+
+# Xcode Derived Data and archives
+DerivedData/
+*.xcarchive
+
+# Xcode Project settings
+# Note: xcshareddata can be committed to share schemes and settings with other developers.
+# But individual settings should be ignored.
+*/*.product
+*/.DS_Store
+*.moved-aside
+
+# CocoaPods
+#
+# We recommend against committing the Pods directory to your repository.
+# However, if you choose to do so, please remove the line below.
+Pods/
+
+# Carthage
+#
+# We recommend against committing the Carthage/Build directory to your repository.
+# However, if you choose to do so, please remove the line below.
+Carthage/Build/
+
+# Swift Package Manager
+#
+# Add this line if you want to ignore the SPM build directory
+.build/
+
+# Swift Package Manager local/user settings
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+.swiftpm/xcode/xcuserdata/
+.swiftpm/configuration/
+
+# macOS Files
+.DS_Store
+Files.localized
+
+# Fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to upload more metadata.
+fastlane/screenshots/
+fastlane/test_output/
+
+# Backup files
+*~
+*.stackdump

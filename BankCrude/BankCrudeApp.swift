@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct BankCrudeApp: App {
+    @State private var router = NavigationRouter()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootTabView()
+                .environment(router)
         }
     }
 }

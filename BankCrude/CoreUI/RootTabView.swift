@@ -38,6 +38,8 @@ struct RootTabView: View {
     @ViewBuilder
     private func tabContentView(for tab: AppTab) -> some View {
         switch tab {
+        case .dashboard:
+            DashboardView()
         default:
             EmptyView()
         }

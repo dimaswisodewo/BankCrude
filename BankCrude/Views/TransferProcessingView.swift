@@ -53,13 +53,9 @@ struct TransferProcessingView: View {
         .background(Color.backgroundWhite)
         .navigationBarBackButtonHidden(true) // Prevent going back during processing
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                 // Safely replace the processing route with the transaction receipt view
-                if let index = router.path.firstIndex(of: .transferProcessing(transaction)) {
-                    router.path[index] = .transactionReceipt(transaction, isFromTransfer: true)
-                } else {
-                    router.push(.transactionReceipt(transaction, isFromTransfer: true))
-                }
+                router.replace(.transferProcessing(transaction), with: .transactionReceipt(transaction, isFromTransfer: true))
             }
         }
     }

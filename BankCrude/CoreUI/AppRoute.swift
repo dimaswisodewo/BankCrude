@@ -78,6 +78,16 @@ class NavigationRouter {
         path.removeAll()
     }
     
+    /// Replaces a specific route in the navigation path with a new route.
+    /// If the target route is not found, the new route is pushed onto the path.
+    func replace(_ route: AppRoute, with newRoute: AppRoute) {
+        if let index = path.firstIndex(of: route) {
+            path[index] = newRoute
+        } else {
+            push(newRoute)
+        }
+    }
+    
     // MARK: - Presentation Methods
     
     /// Presents a sheet by adding a route to the stack.

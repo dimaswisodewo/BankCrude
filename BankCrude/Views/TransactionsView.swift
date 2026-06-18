@@ -31,7 +31,11 @@ struct TransactionsView: View {
                 GridMenuItem(title: "Transfer Same Bank", iconName: "arrow.up"),
                 GridMenuItem(title: "Transfer Other Bank", iconName: "building.columns"),
                 GridMenuItem(title: "Virtual Account", iconName: "banknote"),
-                GridMenuItem(title: "Proxy Address", iconName: "globe", isNewFeature: true)
+                GridMenuItem(title: "Proxy Address", iconName: "globe", isNewFeature: true),
+                GridMenuItem(title: "QRIS Payment", iconName: "qrcode"),
+                GridMenuItem(title: "Cardless Withdrawal", iconName: "square.and.arrow.down"),
+                GridMenuItem(title: "Split Bill", iconName: "person.2"),
+                GridMenuItem(title: "International", iconName: "dollarsign.arrow.circlepath")
             ]
         ),
         TransactionSection(
@@ -40,7 +44,8 @@ struct TransactionsView: View {
             items: [
                 GridMenuItem(title: "Mobile Data", iconName: "iphone"),
                 GridMenuItem(title: "Phone Credit", iconName: "phone.arrow.up.right"),
-                GridMenuItem(title: "Post Paid", iconName: "iphone.badge.exclamationmark")
+                GridMenuItem(title: "Post Paid", iconName: "iphone.badge.exclamationmark"),
+                GridMenuItem(title: "Roaming Packages", iconName: "antenna.radiowaves.left.and.right", isNewFeature: true)
             ]
         ),
         TransactionSection(
@@ -53,7 +58,11 @@ struct TransactionsView: View {
                 GridMenuItem(title: "Installment", iconName: "creditcard"),
                 GridMenuItem(title: "BPJS", iconName: "person.text.rectangle"),
                 GridMenuItem(title: "PBB", iconName: "building.2"),
-                GridMenuItem(title: "MPN", iconName: "building.columns")
+                GridMenuItem(title: "MPN", iconName: "building.columns"),
+                GridMenuItem(title: "Cable TV & Internet", iconName: "tv"),
+                GridMenuItem(title: "Education Fees", iconName: "graduationcap"),
+                GridMenuItem(title: "Gas Utility", iconName: "flame"),
+                GridMenuItem(title: "Zakat & Alms", iconName: "heart")
             ]
         ),
         TransactionSection(
@@ -62,7 +71,31 @@ struct TransactionsView: View {
             items: [
                 GridMenuItem(title: "E-Money", iconName: "wallet.pass"),
                 GridMenuItem(title: "Mobile Legends", iconName: "gamecontroller"),
-                GridMenuItem(title: "Genshin Impact", iconName: "gamecontroller", isNewFeature: true)
+                GridMenuItem(title: "Genshin Impact", iconName: "gamecontroller", isNewFeature: true),
+                GridMenuItem(title: "Steam Wallet", iconName: "gamecontroller"),
+                GridMenuItem(title: "PlayStation Network", iconName: "gamecontroller"),
+                GridMenuItem(title: "App Store & iTunes", iconName: "apple.logo"),
+                GridMenuItem(title: "Google Play", iconName: "play.circle")
+            ]
+        ),
+        TransactionSection(
+            title: "Investment & Wealth",
+            columnsCount: 4,
+            items: [
+                GridMenuItem(title: "Mutual Funds", iconName: "chart.bar"),
+                GridMenuItem(title: "Gold Savings", iconName: "sparkles", isNewFeature: true),
+                GridMenuItem(title: "Government Bonds", iconName: "doc.text"),
+                GridMenuItem(title: "Stocks", iconName: "chart.line.uptrend.xyaxis")
+            ]
+        ),
+        TransactionSection(
+            title: "Travel & Leisure",
+            columnsCount: 4,
+            items: [
+                GridMenuItem(title: "Flight Tickets", iconName: "airplane"),
+                GridMenuItem(title: "Train Tickets", iconName: "tram"),
+                GridMenuItem(title: "Hotel Booking", iconName: "bed.double"),
+                GridMenuItem(title: "Movie Tickets", iconName: "ticket", isNewFeature: true)
             ]
         )
     ]

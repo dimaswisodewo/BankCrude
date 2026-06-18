@@ -123,6 +123,25 @@ struct DashboardView: View {
                     )
                 }
                 
+                // Primary Action Buttons (Transfer & QRIS)
+                HStack(spacing: 12) {
+                    PrimaryButton(
+                        title: "Transfer",
+                        systemImageName: "arrowshape.turn.up.left.fill"
+                    ) {
+                        selectedItemMessage = "Tapped Transfer"
+                    }
+                    
+                    PrimaryButton(
+                        title: "QRIS",
+                        systemImageName: "qrcode"
+                    ) {
+                        selectedItemMessage = "Tapped QRIS"
+                    }
+                }
+                .padding(.horizontal, 24)
+                .padding(.top, 24)
+                
                 // Quick Access Section
                 QuickAccessView(
                     onItemTap: { item in

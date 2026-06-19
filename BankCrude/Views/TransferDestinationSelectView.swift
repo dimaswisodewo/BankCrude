@@ -150,13 +150,6 @@ struct TransferDestinationSelectView: View {
         .background(Color.backgroundWhite)
         .navigationTitle("Transfer Destination")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                CloseButton {
-                    router.pop()
-                }
-            }
-        }
     }
 }
 

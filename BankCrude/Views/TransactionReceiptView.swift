@@ -106,7 +106,7 @@ struct TransactionReceiptView: View {
                             detailRow(label: "Recipient/Sender", value: transaction.title)
                             detailRow(label: "Description/Account", value: transaction.subtitle)
                             if let sourceAccount = transaction.sourceAccountName {
-                                let displayVal = transaction.sourceAccountNumber.map { "\(sourceAccount)\n• \($0)" } ?? sourceAccount
+                                let displayVal = transaction.sourceAccountNumber.map { "\(sourceAccount)\n\($0)" } ?? sourceAccount
                                 detailRow(label: "Source Account", value: displayVal)
                             }
                             detailRow(label: "Date & Time", value: formattedDate)

@@ -21,138 +21,124 @@ struct TransferConfirmationSheetView: View {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-//            ZStack {
-//                Text("Transfer Confirmation")
-//                    .typography(.body, weight: .bold)
-//                    .foregroundColor(.textPrimary)
-//                
-//                HStack {
-//                    Spacer()
-//                    CloseButton {
-//                        router.dismissSheet()
-//                    }
-//                    .padding(.trailing, 24)
-//                }
-//            }
-//            .padding(.top, 36)
-//            .padding(.bottom, 24)
-            
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 24) {
-                    // Recipient Section Card
-                    VStack(alignment: .leading, spacing: 16) {
-                        Text("Recipient")
-                            .typography(.footnote, weight: .bold)
-                            .foregroundColor(.textSecondary)
-                        
-                        HStack(spacing: 16) {
-                            Circle()
-                                .fill(Color(hex: "EDEDED"))
-                                .frame(width: 48, height: 48)
-                                .overlay(
-                                    Text(String(recipientName.prefix(2)).uppercased())
-                                        .typography(.body, weight: .bold)
-                                        .foregroundColor(.textPrimary)
-                                )
+        NavigationStack {
+            VStack(spacing: 0) {
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 24) {
+                        // Recipient Section Card
+                        VStack(alignment: .leading, spacing: 16) {
+                            Text("Recipient")
+                                .typography(.footnote, weight: .bold)
+                                .foregroundColor(.textSecondary)
                             
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(recipientName)
-                                    .typography(.body, weight: .semibold)
-                                    .foregroundColor(.textPrimary)
-                                Text("\(bank) • \(accountNumber)")
-                                    .typography(.footnote, weight: .regular)
-                                    .foregroundColor(.textSecondary)
+                            HStack(spacing: 16) {
+                                Circle()
+                                    .fill(Color(hex: "EDEDED"))
+                                    .frame(width: 48, height: 48)
+                                    .overlay(
+                                        Text(String(recipientName.prefix(2)).uppercased())
+                                            .typography(.body, weight: .bold)
+                                            .foregroundColor(.textPrimary)
+                                    )
+                                
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(recipientName)
+                                        .typography(.body, weight: .semibold)
+                                        .foregroundColor(.textPrimary)
+                                    Text("\(bank) • \(accountNumber)")
+                                        .typography(.footnote, weight: .regular)
+                                        .foregroundColor(.textSecondary)
+                                }
                             }
                         }
-                    }
-                    .padding(16)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color.white)
-                    .cornerRadius(12)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color.black.opacity(0.05), lineWidth: 1)
-                    )
-                    
-                    // Transaction Breakdown Card
-                    VStack(alignment: .leading, spacing: 16) {
-                        Text("Transaction Details")
-                            .typography(.footnote, weight: .bold)
-                            .foregroundColor(.textSecondary)
+                        .padding(16)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(Color.white)
+                        .cornerRadius(12)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.black.opacity(0.05), lineWidth: 1)
+                        )
                         
-                        detailRow(label: "Source Account", value: "\(sourceAccount.accountType)\n• \(sourceAccount.accountNumber)")
-                        detailRow(label: "Amount", value: amount.formattedAsRupiah())
-                        detailRow(label: "Transfer Fee", value: "Rp 0,00")
-                        
-                        if let note = note, !note.isEmpty {
-                            detailRow(label: "Note", value: note)
+                        // Transaction Breakdown Card
+                        VStack(alignment: .leading, spacing: 16) {
+                            Text("Transaction Details")
+                                .typography(.footnote, weight: .bold)
+                                .foregroundColor(.textSecondary)
+                            
+                            detailRow(label: "Source Account", value: "\(sourceAccount.accountType)\n\(sourceAccount.accountNumber)")
+                            detailRow(label: "Amount", value: amount.formattedAsRupiah())
+                            detailRow(label: "Transfer Fee", value: "Rp 0,00")
+                            
+                            if let note = note, !note.isEmpty {
+                                detailRow(label: "Note", value: note)
+                            }
+                            
+                            Divider()
+                                .background(Color.black.opacity(0.06))
+                                .padding(.vertical, 4)
+                            
+                            HStack {
+                                Text("Total")
+                                    .typography(.body, weight: .bold)
+                                    .foregroundColor(.textPrimary)
+                                Spacer()
+                                Text(amount.formattedAsRupiah())
+                                    .typography(.body, weight: .bold)
+                                    .foregroundColor(.textPrimary)
+                            }
                         }
-                        
-                        Divider()
-                            .background(Color.black.opacity(0.06))
-                            .padding(.vertical, 4)
-                        
-                        HStack {
-                            Text("Total")
-                                .typography(.body, weight: .bold)
-                                .foregroundColor(.textPrimary)
-                            Spacer()
-                            Text(amount.formattedAsRupiah())
-                                .typography(.body, weight: .bold)
-                                .foregroundColor(.textPrimary)
-                        }
+                        .padding(16)
+                        .background(Color.white)
+                        .cornerRadius(12)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.black.opacity(0.05), lineWidth: 1)
+                        )
                     }
-                    .padding(16)
-                    .background(Color.white)
-                    .cornerRadius(12)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color.black.opacity(0.05), lineWidth: 1)
-                    )
+                    .padding(.horizontal, 24)
                 }
-                .padding(.horizontal, 24)
-            }
-            
-            // Bottom Confirm Button
-            VStack {
-                PrimaryButton(title: "Confirm & Send") {
-                    // Create transaction item
-                    let transaction = TransactionItem(
-                        date: Date(),
-                        title: recipientName,
-                        subtitle: "Transfer to \(bank) Account (\(accountNumber))",
-                        amount: amount,
-                        type: .outflow,
-                        status: .success,
-                        note: note,
-                        sourceAccountName: sourceAccount.accountType,
-                        sourceAccountNumber: sourceAccount.accountNumber
-                    )
-                    
-                    // Dismiss confirmation sheet
-                    router.dismissSheet()
-                    
-                    // Push processing screen
-                    router.push(.transferProcessing(transaction))
+                
+                // Bottom Confirm Button
+                VStack {
+                    PrimaryButton(title: "Confirm & Send") {
+                        // Create transaction item
+                        let transaction = TransactionItem(
+                            date: Date(),
+                            title: recipientName,
+                            subtitle: "Transfer to \(bank) Account (\(accountNumber))",
+                            amount: amount,
+                            type: .outflow,
+                            status: .success,
+                            note: note,
+                            sourceAccountName: sourceAccount.accountType,
+                            sourceAccountNumber: sourceAccount.accountNumber
+                        )
+                        
+                        // Dismiss confirmation sheet
+                        router.dismissSheet()
+                        
+                        // Push processing screen
+                        router.push(.transferProcessing(transaction))
+                    }
+                    .padding(.horizontal, 24)
+                    .padding(.vertical, 16)
+                    .buttonStyle(ScaleButtonStyle())
                 }
-                .padding(.horizontal, 24)
-                .padding(.vertical, 16)
-                .buttonStyle(ScaleButtonStyle())
+                .background(Color.backgroundWhite)
             }
             .background(Color.backgroundWhite)
-        }
-        .background(Color.backgroundWhite)
-        .presentationDetents([.large])
-        .navigationTitle("Transfer Destination")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                CloseButton {
-                    router.pop()
+            .navigationTitle("Transfer Confirmation")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    CloseButton {
+                        router.dismissSheet()
+                    }
                 }
             }
         }
+        .presentationDetents([.large])
     }
     
     private func detailRow(label: String, value: String) -> some View {

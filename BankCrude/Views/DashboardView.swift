@@ -159,8 +159,8 @@ struct DashboardView: View {
                     onItemTap: { item in
                         selectedItemMessage = "Tapped: \(item.title)"
                     },
-                    onEditTap: {
-                        selectedItemMessage = "Tapped Edit Quick Access"
+                    onEditTap: { isEditing in
+                        selectedItemMessage = isEditing ? "Tapped Edit Quick Access" : "Tapped Save Quick Access"
                     },
                     onAddTap: {
                         selectedItemMessage = "Tapped Add Quick Access"

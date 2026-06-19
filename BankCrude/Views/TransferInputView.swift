@@ -397,11 +397,9 @@ struct BankSelectionSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Close") {
+                    CloseButton {
                         router.dismissSheet()
                     }
-                    .typography(.body, weight: .bold)
-                    .foregroundColor(.primaryRed)
                 }
             }
         }
@@ -485,11 +483,9 @@ struct SourceAccountSelectionSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Close") {
+                    CloseButton {
                         router.dismissSheet()
                     }
-                    .typography(.body, weight: .bold)
-                    .foregroundColor(.primaryRed)
                 }
             }
         }

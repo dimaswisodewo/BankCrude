@@ -130,7 +130,7 @@ struct AppRouterView {
                 note: note,
                 sourceAccount: sourceAccount
             )
-            .presentationDetents([.medium])
+            .presentationDetents([.large])
             
         default:
             EmptyView()

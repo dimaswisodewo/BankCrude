@@ -31,13 +31,21 @@ struct TransferConfirmationSheetView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Spacer()
-                .frame(height: 36)
-            
-            Text("Transfer Confirmation")
-                .typography(.title3, weight: .bold)
-                .foregroundColor(.textPrimary)
-                .padding(.bottom, 24)
+            ZStack {
+                Text("Transfer Confirmation")
+                    .typography(.body, weight: .bold)
+                    .foregroundColor(.textPrimary)
+                
+                HStack {
+                    Spacer()
+                    CloseButton {
+                        router.dismissSheet()
+                    }
+                    .padding(.trailing, 24)
+                }
+            }
+            .padding(.top, 36)
+            .padding(.bottom, 24)
             
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 24) {
@@ -144,7 +152,7 @@ struct TransferConfirmationSheetView: View {
             .background(Color.backgroundWhite)
         }
         .background(Color.backgroundWhite)
-        .presentationDetents([.medium])
+        .presentationDetents([.large])
     }
     
     private func detailRow(label: String, value: String) -> some View {

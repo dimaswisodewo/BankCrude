@@ -114,12 +114,21 @@ struct AppRouterView {
             )
             .presentationDetents([.large])
             
-        case .transferConfirmation(let bank, let accountNumber, let amount, let note):
+        case .sourceAccountSelection(let currentAccount, let accounts, let callback):
+            SourceAccountSelectionSheet(
+                selectedAccount: currentAccount,
+                accounts: accounts,
+                callback: callback
+            )
+            .presentationDetents([.large])
+            
+        case .transferConfirmation(let bank, let accountNumber, let amount, let note, let sourceAccount):
             TransferConfirmationSheetView(
                 bank: bank,
                 accountNumber: accountNumber,
                 amount: amount,
-                note: note
+                note: note,
+                sourceAccount: sourceAccount
             )
             .presentationDetents([.medium])
             

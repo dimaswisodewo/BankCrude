@@ -16,8 +16,31 @@ struct TransferInputView: View {
     @State private var accountNumber: String
     @State private var rawAmountString: String = ""
     @State private var note: String = ""
+    @State private var selectedSourceAccount: CardItem
+    
     // Quick amount options
     private let quickAmounts = [50000, 100000, 200000, 500000, 1000000]
+    
+    private static let sourceAccounts = [
+        CardItem(
+            accountType: "Saving Account",
+            accountNumber: "0342039298",
+            balance: 9999999999.00,
+            gradientColors: [Color.primaryRed, Color(hex: "C21109")]
+        ),
+        CardItem(
+            accountType: "Secondary Account",
+            accountNumber: "0293049102",
+            balance: 24500000.00,
+            gradientColors: [Color(hex: "1A1D1A"), Color(hex: "343A34")]
+        ),
+        CardItem(
+            accountType: "Investment Account",
+            accountNumber: "0938491823",
+            balance: 1200000000.00,
+            gradientColors: [Color(hex: "0C58A6"), Color(hex: "083E75")]
+        )
+    ]
     
     private let banks = [
         "Bank Crude",
@@ -42,6 +65,7 @@ struct TransferInputView: View {
         self.prefilledAccountNumber = prefilledAccountNumber
         self._selectedBank = State(initialValue: prefilledBank ?? "Bank Crude")
         self._accountNumber = State(initialValue: prefilledAccountNumber ?? "")
+        self._selectedSourceAccount = State(initialValue: Self.sourceAccounts[0])
     }
     
     private var amountDecimal: Decimal {
@@ -58,6 +82,59 @@ struct TransferInputView: View {
         VStack(spacing: 0) {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 24) {
+                    // Source Account Card
+                    VStack(alignment: .leading, spacing: 20) {
+                        Text("Source Account")
+                            .typography(.subheadline, weight: .bold)
+                            .foregroundColor(.textPrimary)
+                        
+                        Button(action: {
+                            router.presentSheet(
+                                .sourceAccountSelection(
+                                    currentAccount: selectedSourceAccount,
+                                    accounts: Self.sourceAccounts,
+                                    callback: NavigationCallback { account in
+                                        selectedSourceAccount = account
+                                    }
+                                )
+                            )
+                        }) {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 6) {
+                                    Text(selectedSourceAccount.accountType)
+                                        .typography(.body, weight: .semibold)
+                                        .foregroundColor(.textPrimary)
+                                    
+                                    Text(selectedSourceAccount.accountNumber)
+                                        .typography(.caption, weight: .regular)
+                                        .foregroundColor(.textSecondary)
+                                }
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.down")
+                                    .font(.system(size: 14, weight: .bold))
+                                    .foregroundColor(.textSecondary)
+                            }
+                            .padding(14)
+                            .background(Color(hex: "FAFAFA"))
+                            .cornerRadius(12)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(Color.black.opacity(0.06), lineWidth: 1)
+                            )
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
+                    .padding(20)
+                    .background(Color.white)
+                    .cornerRadius(16)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(Color.black.opacity(0.05), lineWidth: 1)
+                    )
+                    .shadow(color: Color.black.opacity(0.01), radius: 6, x: 0, y: 3)
+                    
                     // Form Fields Card
                     VStack(alignment: .leading, spacing: 20) {
                         Text("Destination Details")
@@ -242,7 +319,8 @@ struct TransferInputView: View {
                         bank: selectedBank,
                         accountNumber: accountNumber,
                         amount: amountDecimal,
-                        note: note.isEmpty ? nil : note
+                        note: note.isEmpty ? nil : note,
+                        sourceAccount: selectedSourceAccount
                     ))
                 }
                 .disabled(!isFormValid)
@@ -330,6 +408,95 @@ struct BankSelectionSheet: View {
         .presentationDetents([.large])
     }
 }
+
+// MARK: - Source Account Selection Sheet
+struct SourceAccountSelectionSheet: View {
+    @Environment(NavigationRouter.self) private var router
+    let selectedAccount: CardItem
+    let accounts: [CardItem]
+    let callback: NavigationCallback<CardItem>
+    
+    @State private var searchText = ""
+    @State private var debouncedSearchText = ""
+    
+    private var filteredAccounts: [CardItem] {
+        if debouncedSearchText.isEmpty {
+            return accounts
+        } else {
+            return accounts.filter {
+                $0.accountType.localizedCaseInsensitiveContains(debouncedSearchText) ||
+                $0.accountNumber.localizedCaseInsensitiveContains(debouncedSearchText)
+            }
+        }
+    }
+    
+    var body: some View {
+        NavigationStack {
+            VStack(spacing: 0) {
+                // Search Bar
+                VStack(spacing: 16) {
+                    SearchBarView(
+                        text: $searchText,
+                        placeholder: "Search source account...",
+                        delay: 0.2
+                    ) { debouncedVal in
+                        debouncedSearchText = debouncedVal
+                    }
+                }
+                .padding(.horizontal, 24)
+                .padding(.vertical, 16)
+                
+                // Account List
+                List {
+                    ForEach(filteredAccounts) { account in
+                        Button(action: {
+                            callback.action(account)
+                            router.dismissSheet()
+                        }) {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(account.accountType)
+                                        .typography(.body, weight: .semibold)
+                                        .foregroundColor(.textPrimary)
+                                    
+                                    Text(account.accountNumber)
+                                        .typography(.caption, weight: .regular)
+                                        .foregroundColor(.textSecondary)
+                                    
+                                    Text("Balance: \(account.balance.formattedAsRupiah())")
+                                        .typography(.caption, weight: .regular)
+                                        .foregroundColor(.textSecondary)
+                                }
+                                
+                                Spacer()
+                                
+                                if selectedAccount.id == account.id {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .foregroundColor(.primaryRed)
+                                }
+                            }
+                            .padding(.vertical, 8)
+                        }
+                    }
+                }
+                .listStyle(PlainListStyle())
+            }
+            .navigationTitle("Select Source Account")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Close") {
+                        router.dismissSheet()
+                    }
+                    .typography(.body, weight: .bold)
+                    .foregroundColor(.primaryRed)
+                }
+            }
+        }
+        .presentationDetents([.large])
+    }
+}
+
 
 #Preview {
     PreviewRouterWrapper {

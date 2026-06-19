@@ -14,6 +14,7 @@ struct TransferConfirmationSheetView: View {
     let accountNumber: String
     let amount: Decimal
     let note: String?
+    let sourceAccount: CardItem
     
     private var recipientName: String {
         // Simple mock lookup based on our saved accounts list
@@ -81,7 +82,7 @@ struct TransferConfirmationSheetView: View {
                             .typography(.footnote, weight: .bold)
                             .foregroundColor(.textSecondary)
                         
-                        detailRow(label: "Source Account", value: "Saving Account")
+                        detailRow(label: "Source Account", value: "\(sourceAccount.accountType)\n• \(sourceAccount.accountNumber)")
                         detailRow(label: "Amount", value: amount.formattedAsRupiah())
                         detailRow(label: "Transfer Fee", value: "Rp 0,00")
                         
@@ -124,7 +125,10 @@ struct TransferConfirmationSheetView: View {
                         subtitle: "Transfer to \(bank) Account (\(accountNumber))",
                         amount: amount,
                         type: .outflow,
-                        status: .success
+                        status: .success,
+                        note: note,
+                        sourceAccountName: sourceAccount.accountType,
+                        sourceAccountNumber: sourceAccount.accountNumber
                     )
                     
                     // Dismiss confirmation sheet
@@ -162,7 +166,12 @@ struct TransferConfirmationSheetView: View {
         bank: "Bank Crude",
         accountNumber: "0342039298",
         amount: 250000.00,
-        note: "Dinner contribution"
+        note: "Dinner contribution",
+        sourceAccount: CardItem(
+            accountType: "Saving Account",
+            accountNumber: "0342039298",
+            balance: 9999999999.00
+        )
     )
     .environment(NavigationRouter())
 }

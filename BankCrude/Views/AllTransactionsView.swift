@@ -35,7 +35,10 @@ struct AllTransactionsView: View {
                 subtitle: "Transfer to BCA Account (0342039298)",
                 amount: 50000.00,
                 type: .outflow,
-                status: .success
+                status: .success,
+                note: "Weekly coffee share ☕️",
+                sourceAccountName: "Saving Account",
+                sourceAccountNumber: "0342039298"
             ),
             TransactionItem(
                 date: baseDate,
@@ -43,7 +46,9 @@ struct AllTransactionsView: View {
                 subtitle: "PT Tech Indo - Monthly Salary",
                 amount: 15000000.00,
                 type: .inflow,
-                status: .success
+                status: .success,
+                sourceAccountName: "Saving Account",
+                sourceAccountNumber: "0342039298"
             ),
             TransactionItem(
                 date: calendar.date(byAdding: .day, value: -1, to: baseDate) ?? baseDate,
@@ -51,7 +56,10 @@ struct AllTransactionsView: View {
                 subtitle: "Electricity Bill Payment",
                 amount: 450000.00,
                 type: .outflow,
-                status: .success
+                status: .success,
+                note: "PLN ID: 53229048123",
+                sourceAccountName: "Saving Account",
+                sourceAccountNumber: "0342039298"
             ),
             TransactionItem(
                 date: calendar.date(byAdding: .day, value: -1, to: baseDate) ?? baseDate,
@@ -59,7 +67,9 @@ struct AllTransactionsView: View {
                 subtitle: "Food & Beverage",
                 amount: 125000.00,
                 type: .outflow,
-                status: .success
+                status: .success,
+                sourceAccountName: "Saving Account",
+                sourceAccountNumber: "0342039298"
             ),
             TransactionItem(
                 date: calendar.date(byAdding: .day, value: -2, to: baseDate) ?? baseDate,
@@ -67,7 +77,9 @@ struct AllTransactionsView: View {
                 subtitle: "Received from CIMB Account",
                 amount: 99000000.00,
                 type: .inflow,
-                status: nil
+                status: nil,
+                sourceAccountName: "Saving Account",
+                sourceAccountNumber: "0342039298"
             ),
             TransactionItem(
                 date: calendar.date(byAdding: .day, value: -2, to: baseDate) ?? baseDate,
@@ -75,7 +87,10 @@ struct AllTransactionsView: View {
                 subtitle: "Entertainment Purchase",
                 amount: 600000.00,
                 type: .outflow,
-                status: .success
+                status: .success,
+                note: "Steam Game Bundle Purchases",
+                sourceAccountName: "Secondary Account",
+                sourceAccountNumber: "0293049102"
             ),
             TransactionItem(
                 date: calendar.date(byAdding: .day, value: -3, to: baseDate) ?? baseDate,
@@ -83,7 +98,10 @@ struct AllTransactionsView: View {
                 subtitle: "Transfer to Bank Jago Account",
                 amount: 2000000.00,
                 type: .outflow,
-                status: .failed
+                status: .failed,
+                note: "Freelance down payment",
+                sourceAccountName: "Secondary Account",
+                sourceAccountNumber: "0293049102"
             ),
             TransactionItem(
                 date: calendar.date(byAdding: .day, value: -4, to: baseDate) ?? baseDate,
@@ -91,7 +109,9 @@ struct AllTransactionsView: View {
                 subtitle: "Virtual Account BCA Payment",
                 amount: 250000.00,
                 type: .outflow,
-                status: .success
+                status: .success,
+                sourceAccountName: "Secondary Account",
+                sourceAccountNumber: "0293049102"
             ),
             TransactionItem(
                 date: calendar.date(byAdding: .day, value: -5, to: baseDate) ?? baseDate,
@@ -99,7 +119,10 @@ struct AllTransactionsView: View {
                 subtitle: "Food & Beverage",
                 amount: 85000.00,
                 type: .outflow,
-                status: .success
+                status: .success,
+                note: "Cappuccino & Croissant",
+                sourceAccountName: "Secondary Account",
+                sourceAccountNumber: "0293049102"
             ),
             TransactionItem(
                 date: calendar.date(byAdding: .day, value: -6, to: baseDate) ?? baseDate,
@@ -107,7 +130,9 @@ struct AllTransactionsView: View {
                 subtitle: "Insurance Premium Payment",
                 amount: 150000.00,
                 type: .outflow,
-                status: .success
+                status: .success,
+                sourceAccountName: "Saving Account",
+                sourceAccountNumber: "0342039298"
             ),
             TransactionItem(
                 date: calendar.date(byAdding: .day, value: -7, to: baseDate) ?? baseDate,
@@ -115,7 +140,9 @@ struct AllTransactionsView: View {
                 subtitle: "Refund for cancelled order",
                 amount: 1200000.00,
                 type: .inflow,
-                status: .success
+                status: .success,
+                sourceAccountName: "Saving Account",
+                sourceAccountNumber: "0342039298"
             ),
             TransactionItem(
                 date: calendar.date(byAdding: .day, value: -8, to: baseDate) ?? baseDate,
@@ -123,7 +150,9 @@ struct AllTransactionsView: View {
                 subtitle: "Entertainment Services",
                 amount: 186000.00,
                 type: .outflow,
-                status: .success
+                status: .success,
+                sourceAccountName: "Secondary Account",
+                sourceAccountNumber: "0293049102"
             ),
             TransactionItem(
                 date: calendar.date(byAdding: .day, value: -10, to: baseDate) ?? baseDate,
@@ -131,7 +160,9 @@ struct AllTransactionsView: View {
                 subtitle: "E-Wallet Topup",
                 amount: 500000.00,
                 type: .outflow,
-                status: .pending
+                status: .pending,
+                sourceAccountName: "Saving Account",
+                sourceAccountNumber: "0342039298"
             ),
             TransactionItem(
                 date: calendar.date(byAdding: .day, value: -12, to: baseDate) ?? baseDate,
@@ -139,7 +170,9 @@ struct AllTransactionsView: View {
                 subtitle: "Groceries",
                 amount: 98500.00,
                 type: .outflow,
-                status: .success
+                status: .success,
+                sourceAccountName: "Saving Account",
+                sourceAccountNumber: "0342039298"
             ),
             TransactionItem(
                 date: calendar.date(byAdding: .day, value: -14, to: baseDate) ?? baseDate,
@@ -147,7 +180,9 @@ struct AllTransactionsView: View {
                 subtitle: "Stock Market Dividends",
                 amount: 350000.00,
                 type: .inflow,
-                status: .success
+                status: .success,
+                sourceAccountName: "Investment Account",
+                sourceAccountNumber: "0938491823"
             ),
             TransactionItem(
                 date: calendar.date(byAdding: .day, value: -15, to: baseDate) ?? baseDate,
@@ -155,7 +190,10 @@ struct AllTransactionsView: View {
                 subtitle: "Monthly subscription",
                 amount: 650000.00,
                 type: .outflow,
-                status: .failed
+                status: .failed,
+                note: "Failed: insufficient balance",
+                sourceAccountName: "Secondary Account",
+                sourceAccountNumber: "0293049102"
             ),
             TransactionItem(
                 date: calendar.date(byAdding: .day, value: -18, to: baseDate) ?? baseDate,
@@ -163,7 +201,9 @@ struct AllTransactionsView: View {
                 subtitle: "Bill Payment",
                 amount: 890000.00,
                 type: .outflow,
-                status: .success
+                status: .success,
+                sourceAccountName: "Secondary Account",
+                sourceAccountNumber: "0293049102"
             )
         ]
     }

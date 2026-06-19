@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct CardItem: Identifiable, Equatable {
+public struct CardItem: Identifiable, Equatable, Hashable {
     public let id: UUID
     public let accountType: String
     public let accountNumber: String
@@ -26,6 +26,20 @@ public struct CardItem: Identifiable, Equatable {
         self.accountNumber = accountNumber
         self.balance = balance
         self.gradientColors = gradientColors
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(accountType)
+        hasher.combine(accountNumber)
+        hasher.combine(balance)
+    }
+    
+    public static func == (lhs: CardItem, rhs: CardItem) -> Bool {
+        lhs.id == rhs.id &&
+        lhs.accountType == rhs.accountType &&
+        lhs.accountNumber == rhs.accountNumber &&
+        lhs.balance == rhs.balance
     }
 }
 

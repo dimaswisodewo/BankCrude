@@ -105,9 +105,16 @@ struct TransactionReceiptView: View {
                         Group {
                             detailRow(label: "Recipient/Sender", value: transaction.title)
                             detailRow(label: "Description/Account", value: transaction.subtitle)
+                            if let sourceAccount = transaction.sourceAccountName {
+                                let displayVal = transaction.sourceAccountNumber.map { "\(sourceAccount)\n• \($0)" } ?? sourceAccount
+                                detailRow(label: "Source Account", value: displayVal)
+                            }
                             detailRow(label: "Date & Time", value: formattedDate)
                             detailRow(label: "Reference ID", value: referenceNumber)
                             detailRow(label: "Type", value: transaction.type == .inflow ? "Inflow" : "Outflow")
+                            if let note = transaction.note, !note.isEmpty {
+                                detailRow(label: "Notes", value: note)
+                            }
                             detailRow(label: "Admin Fee", value: "Rp 0,00")
                         }
                         
@@ -228,7 +235,7 @@ struct ScaleButtonStyle: ButtonStyle {
     }
 }
 
-#Preview {
+#Preview("With Source Account and Notes") {
     PreviewRouterWrapper {
         NavigationStack {
             TransactionReceiptView(
@@ -238,7 +245,29 @@ struct ScaleButtonStyle: ButtonStyle {
                     subtitle: "Transfer to BCA Account (0342039298)",
                     amount: 50000.00,
                     type: .outflow,
-                    status: .success
+                    status: .success,
+                    note: "Shared lunch bill 🍔",
+                    sourceAccountName: "Saving Account",
+                    sourceAccountNumber: "0342039298"
+                )
+            )
+        }
+    }
+}
+
+#Preview("With Source Account Only") {
+    PreviewRouterWrapper {
+        NavigationStack {
+            TransactionReceiptView(
+                transaction: TransactionItem(
+                    date: Date(),
+                    title: "Aditya Pratama",
+                    subtitle: "Transfer to BCA Account (0342039298)",
+                    amount: 50000.00,
+                    type: .outflow,
+                    status: .success,
+                    sourceAccountName: "Saving Account",
+                    sourceAccountNumber: "0342039298"
                 )
             )
         }

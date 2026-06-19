@@ -51,6 +51,9 @@ public struct TransactionItem: Identifiable, Equatable, Hashable {
     public let amount: Decimal
     public let type: TransactionType
     public let status: TransactionStatus?
+    public let note: String?
+    public let sourceAccountName: String?
+    public let sourceAccountNumber: String?
     
     public init(
         id: UUID = UUID(),
@@ -59,7 +62,10 @@ public struct TransactionItem: Identifiable, Equatable, Hashable {
         subtitle: String,
         amount: Decimal,
         type: TransactionType,
-        status: TransactionStatus? = nil
+        status: TransactionStatus? = nil,
+        note: String? = nil,
+        sourceAccountName: String? = nil,
+        sourceAccountNumber: String? = nil
     ) {
         self.id = id
         self.date = date
@@ -68,6 +74,9 @@ public struct TransactionItem: Identifiable, Equatable, Hashable {
         self.amount = amount
         self.type = type
         self.status = status
+        self.note = note
+        self.sourceAccountName = sourceAccountName
+        self.sourceAccountNumber = sourceAccountNumber
     }
     
     public var dayString: String {

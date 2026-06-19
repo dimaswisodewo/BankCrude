@@ -40,8 +40,10 @@ enum AppRoute: Hashable, Identifiable {
     case transferProcessing(TransactionItem)
     /// View for selecting destination bank.
     case bankSelection(currentBank: String, banksSelection: [String], callback: NavigationCallback<String>)
+    /// View for selecting source account.
+    case sourceAccountSelection(currentAccount: CardItem, accounts: [CardItem], callback: NavigationCallback<CardItem>)
     /// View for confirming transfer details.
-    case transferConfirmation(bank: String, accountNumber: String, amount: Decimal, note: String?)
+    case transferConfirmation(bank: String, accountNumber: String, amount: Decimal, note: String?, sourceAccount: CardItem)
     
     var id: Self { self }
 }

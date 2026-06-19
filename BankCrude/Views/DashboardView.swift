@@ -47,7 +47,10 @@ struct DashboardView: View {
                 subtitle: "Transfer to BCA Account (0342039298)",
                 amount: 50000.00,
                 type: .outflow,
-                status: .success
+                status: .success,
+                note: "Weekly coffee share ☕️",
+                sourceAccountName: "Saving Account",
+                sourceAccountNumber: "0342039298"
             ),
             TransactionItem(
                 date: calendar.date(byAdding: .day, value: -2, to: baseDate) ?? baseDate,
@@ -55,7 +58,9 @@ struct DashboardView: View {
                 subtitle: "Received from CIMB Account",
                 amount: 99000000.00,
                 type: .inflow,
-                status: nil
+                status: nil,
+                sourceAccountName: "Saving Account",
+                sourceAccountNumber: "0342039298"
             ),
             TransactionItem(
                 date: calendar.date(byAdding: .day, value: -3, to: baseDate) ?? baseDate,
@@ -63,7 +68,10 @@ struct DashboardView: View {
                 subtitle: "Transfer to Bank Jago Account",
                 amount: 2000000.00,
                 type: .outflow,
-                status: .failed
+                status: .failed,
+                note: "Freelance down payment",
+                sourceAccountName: "Secondary Account",
+                sourceAccountNumber: "0293049102"
             ),
             TransactionItem(
                 date: calendar.date(byAdding: .day, value: -4, to: baseDate) ?? baseDate,
@@ -71,7 +79,9 @@ struct DashboardView: View {
                 subtitle: "Virtual Account BCA Payment",
                 amount: 250000.00,
                 type: .outflow,
-                status: .success
+                status: .success,
+                sourceAccountName: "Secondary Account",
+                sourceAccountNumber: "0293049102"
             )
         ]
     }

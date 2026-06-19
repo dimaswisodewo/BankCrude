@@ -33,15 +33,7 @@ public struct QuickAccessView: View {
     @State private var isEditing = false
     
     // Grid items representing the E-Money, Virtual Account, PLN Electricity, PDAM, Credit Card, and Installment options.
-    private let items: [QuickAccessItemType] = [
-        .menuItem(GridMenuItem(title: "E-Money", iconName: "wallet.pass")),
-        .menuItem(GridMenuItem(title: "Virtual Account", iconName: "banknote")),
-        .menuItem(GridMenuItem(title: "PLN Electricity", iconName: "lightbulb")),
-        .menuItem(GridMenuItem(title: "PDAM", iconName: "drop")),
-        .menuItem(GridMenuItem(title: "Credit Card", iconName: "creditcard")),
-        .menuItem(GridMenuItem(title: "Installment", iconName: "creditcard", isNewFeature: true)),
-        .add
-    ]
+    private let items: [QuickAccessItemType] = MockData.quickAccessItems
     
     public init(
         onItemTap: @escaping (GridMenuItem) -> Void,

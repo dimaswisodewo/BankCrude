@@ -23,11 +23,7 @@ public struct PromoCarouselView: View {
     @State private var activeIndex: Int = 0
     
     public init(
-        items: [PromoItem] = [
-            PromoItem(imageName: "promo_placeholder"),
-            PromoItem(imageName: "promo_placeholder"),
-            PromoItem(imageName: "promo_placeholder")
-        ],
+        items: [PromoItem] = MockData.promoItems,
         itemWidth: CGFloat = UIScreen.main.bounds.width - 32
     ) {
         self.items = items

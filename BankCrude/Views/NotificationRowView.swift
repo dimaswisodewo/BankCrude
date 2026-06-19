@@ -154,42 +154,7 @@ public struct NotificationRowView: View {
 }
 
 #Preview {
-    let calendar = Calendar.current
-    let date = calendar.date(from: DateComponents(year: 2026, month: 6, day: 16)) ?? Date()
-    
-    let mockNotifications = [
-        NotificationItem(
-            date: date,
-            title: "Cashflow - Spending",
-            amount: 50000.00,
-            type: .spending,
-            detail: "to Meynabel Dimas Wisodewo - Bank Jago at Investment Category",
-            isUnread: true
-        ),
-        NotificationItem(
-            date: date,
-            title: "Cashflow - Spending",
-            amount: 10050000.00,
-            type: .spending,
-            detail: "at Shopping",
-            isUnread: false
-        ),
-        NotificationItem(
-            date: date,
-            title: "Cashflow - Income",
-            amount: 2150000.00,
-            type: .income,
-            detail: "from Meynabel Dimas Wisodewo at Shopping Category",
-            isUnread: true
-        ),
-        NotificationItem(
-            date: date,
-            title: "Cashflow - Income",
-            amount: 2150000.00,
-            type: .income,
-            detail: "from Meynabel Dimas Wisodewo at Shopping Category"
-        )
-    ]
+    let mockNotifications = MockData.previewNotifications
     
     return ScrollView {
         VStack(spacing: 0) {

@@ -7,12 +7,20 @@
 
 import SwiftUI
 
-struct SavedAccount: Identifiable, Hashable {
-    let id = UUID()
-    let name: String
-    let bank: String
-    let accountNumber: String
-    let initials: String
+public struct SavedAccount: Identifiable, Hashable {
+    public let id: UUID
+    public let name: String
+    public let bank: String
+    public let accountNumber: String
+    public let initials: String
+
+    public init(id: UUID = UUID(), name: String, bank: String, accountNumber: String, initials: String) {
+        self.id = id
+        self.name = name
+        self.bank = bank
+        self.accountNumber = accountNumber
+        self.initials = initials
+    }
 }
 
 struct TransferDestinationSelectView: View {
@@ -20,16 +28,7 @@ struct TransferDestinationSelectView: View {
     @State private var searchText = ""
     @State private var debouncedSearchText = ""
     
-    private let mockSavedAccounts = [
-        SavedAccount(name: "Radhita Salsabila", bank: "Bank Crude", accountNumber: "0342039298", initials: "RS"),
-        SavedAccount(name: "Agus Subagja", bank: "Bank Mandiri", accountNumber: "1293840291", initials: "AS"),
-        SavedAccount(name: "Dewi Lestari", bank: "Bank Jago", accountNumber: "9038481234", initials: "DL"),
-        SavedAccount(name: "Budi Santoso", bank: "BRI", accountNumber: "0192840294", initials: "BS"),
-        SavedAccount(name: "Siti Rahma", bank: "BNI", accountNumber: "7283940192", initials: "SR"),
-        SavedAccount(name: "Aditya Pratama", bank: "BCA", accountNumber: "8293849102", initials: "AP"),
-        SavedAccount(name: "Joe Cowy", bank: "Bank Crude", accountNumber: "8295842162", initials: "JC"),
-        SavedAccount(name: "Geeb Run", bank: "Bank Crude", accountNumber: "8211845363", initials: "GR")
-    ]
+    private let mockSavedAccounts = MockData.savedAccounts
     
     private var filteredAccounts: [SavedAccount] {
         if debouncedSearchText.isEmpty {

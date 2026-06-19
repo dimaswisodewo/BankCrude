@@ -17,35 +17,26 @@ struct TransferConfirmationSheetView: View {
     let sourceAccount: CardItem
     
     private var recipientName: String {
-        // Simple mock lookup based on our saved accounts list
-        switch accountNumber {
-        case "0342039298": return "Radhita Salsabila"
-        case "1293840291": return "Agus Subagja"
-        case "9038481234": return "Dewi Lestari"
-        case "0192840294": return "Budi Santoso"
-        case "7283940192": return "Siti Rahma"
-        case "8293849102": return "Aditya Pratama"
-        default: return "Aditya Pratama" // Default fallback name
-        }
+        MockData.recipientName(forAccountNumber: accountNumber)
     }
     
     var body: some View {
         VStack(spacing: 0) {
-            ZStack {
-                Text("Transfer Confirmation")
-                    .typography(.body, weight: .bold)
-                    .foregroundColor(.textPrimary)
-                
-                HStack {
-                    Spacer()
-                    CloseButton {
-                        router.dismissSheet()
-                    }
-                    .padding(.trailing, 24)
-                }
-            }
-            .padding(.top, 36)
-            .padding(.bottom, 24)
+//            ZStack {
+//                Text("Transfer Confirmation")
+//                    .typography(.body, weight: .bold)
+//                    .foregroundColor(.textPrimary)
+//                
+//                HStack {
+//                    Spacer()
+//                    CloseButton {
+//                        router.dismissSheet()
+//                    }
+//                    .padding(.trailing, 24)
+//                }
+//            }
+//            .padding(.top, 36)
+//            .padding(.bottom, 24)
             
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 24) {
@@ -153,6 +144,15 @@ struct TransferConfirmationSheetView: View {
         }
         .background(Color.backgroundWhite)
         .presentationDetents([.large])
+        .navigationTitle("Transfer Destination")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                CloseButton {
+                    router.pop()
+                }
+            }
+        }
     }
     
     private func detailRow(label: String, value: String) -> some View {

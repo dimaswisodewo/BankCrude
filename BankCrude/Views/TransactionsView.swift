@@ -7,12 +7,18 @@
 
 import SwiftUI
 
-/// Represents a grouped section of transactional menu items.
-struct TransactionSection: Identifiable {
-    let id = UUID()
-    let title: String
-    let columnsCount: Int?
-    let items: [GridMenuItem]
+public struct TransactionSection: Identifiable {
+    public let id: UUID
+    public let title: String
+    public let columnsCount: Int?
+    public let items: [GridMenuItem]
+
+    public init(id: UUID = UUID(), title: String, columnsCount: Int? = nil, items: [GridMenuItem]) {
+        self.id = id
+        self.title = title
+        self.columnsCount = columnsCount
+        self.items = items
+    }
 }
 
 /// The main Transactions screen conforming to the visual mockup `transactions-view.png`.
@@ -23,82 +29,7 @@ struct TransactionsView: View {
     @State private var selectedItemMessage: String?
     
     // The data source defining all sections and items matching the mockup
-    private let allSections = [
-        TransactionSection(
-            title: "Transfer",
-            columnsCount: 4,
-            items: [
-                GridMenuItem(title: "Transfer Same Bank", iconName: "arrow.up"),
-                GridMenuItem(title: "Transfer Other Bank", iconName: "building.columns"),
-                GridMenuItem(title: "Virtual Account", iconName: "banknote"),
-                GridMenuItem(title: "Proxy Address", iconName: "globe", isNewFeature: true),
-                GridMenuItem(title: "QRIS Payment", iconName: "qrcode"),
-                GridMenuItem(title: "Cardless Withdrawal", iconName: "square.and.arrow.down"),
-                GridMenuItem(title: "Split Bill", iconName: "person.2"),
-                GridMenuItem(title: "International", iconName: "dollarsign.arrow.circlepath")
-            ]
-        ),
-        TransactionSection(
-            title: "Mobile",
-            columnsCount: 4,
-            items: [
-                GridMenuItem(title: "Mobile Data", iconName: "iphone"),
-                GridMenuItem(title: "Phone Credit", iconName: "phone.arrow.up.right"),
-                GridMenuItem(title: "Post Paid", iconName: "iphone.badge.exclamationmark"),
-                GridMenuItem(title: "Roaming Packages", iconName: "antenna.radiowaves.left.and.right", isNewFeature: true)
-            ]
-        ),
-        TransactionSection(
-            title: "Bills",
-            columnsCount: 4,
-            items: [
-                GridMenuItem(title: "Credit Card", iconName: "creditcard"),
-                GridMenuItem(title: "PLN Electricity", iconName: "lightbulb"),
-                GridMenuItem(title: "PDAM", iconName: "drop"),
-                GridMenuItem(title: "Installment", iconName: "creditcard"),
-                GridMenuItem(title: "BPJS", iconName: "person.text.rectangle"),
-                GridMenuItem(title: "PBB", iconName: "building.2"),
-                GridMenuItem(title: "MPN", iconName: "building.columns"),
-                GridMenuItem(title: "Cable TV & Internet", iconName: "tv"),
-                GridMenuItem(title: "Education Fees", iconName: "graduationcap"),
-                GridMenuItem(title: "Gas Utility", iconName: "flame"),
-                GridMenuItem(title: "Zakat & Alms", iconName: "heart")
-            ]
-        ),
-        TransactionSection(
-            title: "Top-Up",
-            columnsCount: 4,
-            items: [
-                GridMenuItem(title: "E-Money", iconName: "wallet.pass"),
-                GridMenuItem(title: "Mobile Legends", iconName: "gamecontroller"),
-                GridMenuItem(title: "Genshin Impact", iconName: "gamecontroller", isNewFeature: true),
-                GridMenuItem(title: "Steam Wallet", iconName: "gamecontroller"),
-                GridMenuItem(title: "PlayStation Network", iconName: "gamecontroller"),
-                GridMenuItem(title: "App Store & iTunes", iconName: "apple.logo"),
-                GridMenuItem(title: "Google Play", iconName: "play.circle")
-            ]
-        ),
-        TransactionSection(
-            title: "Investment & Wealth",
-            columnsCount: 4,
-            items: [
-                GridMenuItem(title: "Mutual Funds", iconName: "chart.bar"),
-                GridMenuItem(title: "Gold Savings", iconName: "sparkles", isNewFeature: true),
-                GridMenuItem(title: "Government Bonds", iconName: "doc.text"),
-                GridMenuItem(title: "Stocks", iconName: "chart.line.uptrend.xyaxis")
-            ]
-        ),
-        TransactionSection(
-            title: "Travel & Leisure",
-            columnsCount: 4,
-            items: [
-                GridMenuItem(title: "Flight Tickets", iconName: "airplane"),
-                GridMenuItem(title: "Train Tickets", iconName: "tram"),
-                GridMenuItem(title: "Hotel Booking", iconName: "bed.double"),
-                GridMenuItem(title: "Movie Tickets", iconName: "ticket", isNewFeature: true)
-            ]
-        )
-    ]
+    private let allSections = MockData.transactionSections
     
     // Computes which sections and items to show based on the debounced search query
     private var filteredSections: [TransactionSection] {

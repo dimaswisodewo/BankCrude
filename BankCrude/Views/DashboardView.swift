@@ -14,76 +14,10 @@ struct DashboardView: View {
     
     // Layout Constants
     private let sectionSpacing: CGFloat = 32
-    
-    let mockCards = [
-        CardItem(
-            accountType: "Saving Account",
-            accountNumber: "0342039298",
-            balance: 9999999999.00,
-            gradientColors: [Color.primaryRed, Color(hex: "C21109")]
-        ),
-        CardItem(
-            accountType: "Secondary Account",
-            accountNumber: "0293049102",
-            balance: 24500000.00,
-            gradientColors: [Color(hex: "1A1D1A"), Color(hex: "343A34")]
-        ),
-        CardItem(
-            accountType: "Investment Account",
-            accountNumber: "0938491823",
-            balance: 1200000000.00,
-            gradientColors: [Color(hex: "0C58A6"), Color(hex: "083E75")]
-        )
-    ]
+    let mockCards = MockData.cards
     
     private var mockTransactions: [TransactionItem] {
-        let calendar = Calendar.current
-        let baseDate = calendar.date(from: DateComponents(year: 2026, month: 6, day: 24)) ?? Date()
-        
-        return [
-            TransactionItem(
-                date: baseDate,
-                title: "Aditya Pratama",
-                subtitle: "Transfer to BCA Account (0342039298)",
-                amount: 50000.00,
-                type: .outflow,
-                status: .success,
-                note: "Weekly coffee share ☕️",
-                sourceAccountName: "Saving Account",
-                sourceAccountNumber: "0342039298"
-            ),
-            TransactionItem(
-                date: calendar.date(byAdding: .day, value: -2, to: baseDate) ?? baseDate,
-                title: "Radhita Salsabila",
-                subtitle: "Received from CIMB Account",
-                amount: 99000000.00,
-                type: .inflow,
-                status: nil,
-                sourceAccountName: "Saving Account",
-                sourceAccountNumber: "0342039298"
-            ),
-            TransactionItem(
-                date: calendar.date(byAdding: .day, value: -3, to: baseDate) ?? baseDate,
-                title: "Agus Subagja",
-                subtitle: "Transfer to Bank Jago Account",
-                amount: 2000000.00,
-                type: .outflow,
-                status: .failed,
-                note: "Freelance down payment",
-                sourceAccountName: "Secondary Account",
-                sourceAccountNumber: "0293049102"
-            ),
-            TransactionItem(
-                date: calendar.date(byAdding: .day, value: -4, to: baseDate) ?? baseDate,
-                title: "Tokopedia",
-                subtitle: "Virtual Account BCA Payment",
-                amount: 250000.00,
-                type: .outflow,
-                status: .success,
-                sourceAccountName: "Secondary Account",
-                sourceAccountNumber: "0293049102"
-            )
-        ]
+        MockData.dashboardTransactions
     }
     
     var body: some View {

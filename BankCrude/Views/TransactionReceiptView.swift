@@ -142,53 +142,48 @@ struct TransactionReceiptView: View {
                                     .stroke(Color.black.opacity(0.05), lineWidth: 1)
                             )
                     )
-                    
-                    // Save Destination Card
-                    if transaction.type == .outflow {
-                        HStack(spacing: 16) {
-                            Image(systemName: isDestinationSaved ? "bookmark.fill" : "bookmark")
-                                .font(.system(size: 20))
-                                .foregroundColor(isDestinationSaved ? .primaryRed : .textSecondary)
-                                .frame(width: 24, height: 24)
-                                .contentTransition(.symbolEffect(.replace))
-                            
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(isDestinationSaved ? "Destination Saved" : "Save Destination")
-                                    .typography(.body, weight: .semibold)
-                                    .foregroundColor(.textPrimary)
-                                Text(isDestinationSaved ? "This account is saved to your transfer list" : "Keep this account for future transfers")
-                                    .typography(.footnote, weight: .regular)
-                                    .foregroundColor(.textSecondary)
-                            }
-                            
-                            Spacer()
-                            
-                            Toggle("", isOn: Binding(
-                                get: { isDestinationSaved },
-                                set: { newValue in
-                                    withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                                        isDestinationSaved = newValue
-                                        toastMessage = newValue ? "Destination saved successfully" : "Destination unsaved"
-                                    }
-                                }
-                            ))
-                            .tint(.primaryRed)
-                            .labelsHidden()
-                        }
-                        .padding(16)
-                        .background(
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(Color.white)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .stroke(Color.black.opacity(0.05), lineWidth: 1)
-                                )
-                        )
-                        .shadow(color: Color.black.opacity(0.02), radius: 6, x: 0, y: 3)
-                    }
                 }
                 .padding(.horizontal, 24)
                 .padding(.bottom, 24)
+            }
+            
+            // Save Destination Card
+            if transaction.type == .outflow {
+                HStack(spacing: 12) {
+                    Image(systemName: isDestinationSaved ? "bookmark.fill" : "bookmark")
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(isDestinationSaved ? .primaryRed : .textSecondary)
+                        .frame(width: 20, height: 20)
+                        .contentTransition(.symbolEffect(.replace))
+                    
+                    Text(isDestinationSaved ? "Destination Saved" : "Save Destination")
+                        .typography(.footnote, weight: .semibold)
+                        .foregroundColor(.textPrimary)
+                    
+                    Spacer()
+                    
+                    Toggle("", isOn: Binding(
+                        get: { isDestinationSaved },
+                        set: { newValue in
+                            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                isDestinationSaved = newValue
+                                toastMessage = newValue ? "Destination saved successfully" : "Destination unsaved"
+                            }
+                        }
+                    ))
+                    .tint(.primaryRed)
+                    .labelsHidden()
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
+                .background(Color.white)
+                .cornerRadius(12)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color.black.opacity(0.05), lineWidth: 1)
+                )
+                .padding(.horizontal, 24)
+                .padding(.bottom, 12)
             }
             
             // Bottom Action Area

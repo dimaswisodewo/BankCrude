@@ -121,14 +121,13 @@ struct DashboardView: View {
                     CardCarouselView(
                         items: mockCards,
                         activeIndex: $activeCardIndex,
-                        itemWidth: 325,
-                        spacing: 16
+                        spacing: 8
                     ) { card in
                         CardView(item: card) {
                             print("Tapped detail for \(card.accountType)")
                         }
                     }
-                    .frame(height: 220) // Frame allows card shadow to render without clipping
+                    .frame(height: 270) // Frame allows card shadow to render without clipping
                     
                     DotPageIndicator(
                         totalCount: mockCards.count,
@@ -140,7 +139,7 @@ struct DashboardView: View {
                 HStack(spacing: 12) {
                     PrimaryButton(
                         title: "Transfer",
-                        systemImageName: "arrowshape.turn.up.left.fill"
+                        systemImageName: "arrowshape.turn.up.left"
                     ) {
                         router.push(.transferDestinationSelect)
                     }

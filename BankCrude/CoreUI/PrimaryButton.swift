@@ -24,7 +24,7 @@ public struct PrimaryButton: View {
         icon: Image? = nil,
         backgroundColor: Color = .primaryBlack,
         foregroundColor: Color = .white,
-        iconColor: Color = .primaryRed,
+        iconColor: Color = .white,
         height: CGFloat = 56,
         action: @escaping () -> Void
     ) {
@@ -43,7 +43,7 @@ public struct PrimaryButton: View {
         systemImageName: String?,
         backgroundColor: Color = .primaryBlack,
         foregroundColor: Color = .white,
-        iconColor: Color = .primaryRed,
+        iconColor: Color = .white,
         height: CGFloat = 56,
         action: @escaping () -> Void
     ) {

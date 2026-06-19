@@ -28,7 +28,7 @@ public struct PromoCarouselView: View {
             PromoItem(imageName: "promo_placeholder"),
             PromoItem(imageName: "promo_placeholder")
         ],
-        itemWidth: CGFloat = 325
+        itemWidth: CGFloat = UIScreen.main.bounds.width - 32
     ) {
         self.items = items
         self.itemWidth = itemWidth
@@ -45,9 +45,9 @@ public struct PromoCarouselView: View {
                     items: items,
                     activeIndex: $activeIndex,
                     itemWidth: itemWidth,
-                    spacing: 16
+                    spacing: 8
                 ) { item in
-                    PromoCardView(item: item, width: itemWidth)
+                    PromoCardView(item: item)
                 }
                 .frame(height: 130) // Extra padding to prevent clipping of shadows or borders
                 
@@ -62,14 +62,14 @@ public struct PromoCarouselView: View {
 
 public struct PromoCardView: View {
     let item: PromoItem
-    let width: CGFloat
     
     public var body: some View {
         if let imageName = item.imageName, !imageName.isEmpty {
             Image(imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: width, height: 120)
+                .frame(maxWidth: .infinity)
+                .frame(height: 120)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
@@ -130,7 +130,8 @@ public struct PromoCardView: View {
                     .padding(.trailing, 24)
                 }
             }
-            .frame(width: width, height: 120)
+            .frame(maxWidth: .infinity)
+            .frame(height: 120)
             .cornerRadius(20)
             .overlay(
                 RoundedRectangle(cornerRadius: 20)

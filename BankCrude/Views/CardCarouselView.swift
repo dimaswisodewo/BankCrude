@@ -19,7 +19,7 @@ public struct CardCarouselView<Item: Identifiable & Equatable, Content: View>: V
     public init(
         items: [Item],
         activeIndex: Binding<Int>,
-        itemWidth: CGFloat = 310,
+        itemWidth: CGFloat = UIScreen.main.bounds.width - 32,
         spacing: CGFloat = 16,
         @ViewBuilder content: @escaping (Item) -> Content
     ) {

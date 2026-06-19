@@ -136,7 +136,7 @@ public struct CardView: View {
             }
         }
         .padding(24)
-        .frame(height: 200)
+        .frame(height: 240)
         .background(
             LinearGradient(
                 colors: item.gradientColors,

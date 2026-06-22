@@ -2,7 +2,7 @@
 //  CloseButton.swift
 //  BankCrude
 //
-//  Created by Antigravity on 19/06/26.
+//  Created by Meynabel Dimas Wisodewo on 19/06/26.
 //
 
 import SwiftUI

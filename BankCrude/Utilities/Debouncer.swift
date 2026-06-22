@@ -2,7 +2,7 @@
 //  Debouncer.swift
 //  BankCrude
 //
-//  Created by Antigravity on 18/06/26.
+//  Created by Meynabel Dimas Wisodewo on 18/06/26.
 //
 
 import Foundation

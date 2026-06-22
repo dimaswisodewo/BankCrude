@@ -1,6 +1,6 @@
 //
 //  AppRoute.swift
-//  Slipi
+//  BankCrude
 //
 //  Created by Meynabel Dimas Wisodewo on 17/05/26.
 //
